@@ -12,7 +12,11 @@ public class PersonDbInMemory {
 	
 	public PersonDbInMemory() {
 		Person administrator = new Person("admin", "admin@ucll.be", "t", "Ad", "Ministrator");
+		Person yenthe = new Person("yenthe", "yenthe@thibault.islove", "t", "Yen", "The");
+		Person thibault = new Person("thibault", "thibault@single.forever", "z&g=/=nietokay", "Thi", "Bault");
 		add(administrator);
+		add(yenthe);
+		add(thibault);
 	}
 	
 	public Person get(String personId){
