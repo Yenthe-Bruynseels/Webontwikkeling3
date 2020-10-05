@@ -22,7 +22,7 @@ public class RegisterTest {
 			// hint: zoek een werkende test op van web 2 ...
 		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
-		driver.get(path+"?action=signUp");
+		driver.get(path+"?command=Register");
 	}
 	
 	@After
@@ -38,7 +38,7 @@ public class RegisterTest {
 		String title = driver.getTitle();
 		assertEquals("Overview",title);
 		
-		driver.get(path+"?action=overview");
+		driver.get(path+"?command=Overview");
 		
 		ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr"));
 		boolean found=false;
@@ -171,7 +171,7 @@ public class RegisterTest {
 		String useridRandom = generateRandomUseridInOrderToRunTestMoreThanOnce("pierke");
 		submitForm(useridRandom, "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 		
-		driver.get(path+"?action=signUp");
+		driver.get(path+"?command=Register");
 
 		submitForm(useridRandom, "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 		
