@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class Controller extends HttpServlet {
 
     ContactTracingService cts = new ContactTracingService();
+    private HandlerFactory handlerFactory = new HandlerFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -28,9 +29,10 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String destination;
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String destination = "index.jsp";
         String command = request.getParameter("command");
+/*
 
         if (command == null) command = "Home";
 
@@ -49,92 +51,23 @@ public class Controller extends HttpServlet {
                 destination = showHome(request, response);
 
         }
-        RequestDispatcher view = request.getRequestDispatcher(destination);
-        view.forward(request, response);
-    }
+*/
 
-    private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {
-        String userid = request.getParameter("userid");
-        try {
-            person.setUserid(userid);
-            request.setAttribute("useridPreviousValue", userid);
-        } catch (DomainException exc) {
-            errors.add(exc.getMessage());
-        }
-    }
-
-    private void setEmail(Person person, HttpServletRequest request, ArrayList<String> errors) {
-        String email = request.getParameter("email");
-        try {
-            person.setEmail(email);
-            request.setAttribute("emailPreviousValue", email);
-        } catch (DomainException exc) {
-            errors.add(exc.getMessage());
-        }
-    }
-
-    private void setFirstName(Person person, HttpServletRequest request, ArrayList<String> errors) {
-        String firstName = request.getParameter("firstName");
-        try {
-            person.setFirstName(firstName);
-            request.setAttribute("firstNamePreviousValue", firstName);
-        } catch (DomainException exc) {
-            errors.add(exc.getMessage());
-        }
-    }
-
-    private void setLastName(Person person, HttpServletRequest request, ArrayList<String> errors) {
-        String lastName = request.getParameter("lastName");
-        try {
-            person.setLastName(lastName);
-            request.setAttribute("lastNamePreviousValue", lastName);
-        } catch (DomainException exc) {
-            errors.add(exc.getMessage());
-        }
-    }
-
-    private void setPassword(Person person, HttpServletRequest request, ArrayList<String> errors) {
-        String password = request.getParameter("password");
-        try {
-            person.setPassword(password);
-            request.setAttribute("passwordPreviousValue", password);
-        } catch (DomainException exc) {
-            errors.add(exc.getMessage());
-        }
-    }
-
-    private String addUser(HttpServletRequest request, HttpServletResponse response) {
-        ArrayList<String> errors = new ArrayList<String>();
-
-        Person person = new Person();
-        setUserid(person, request, errors);
-        setFirstName(person, request, errors);
-        setLastName(person, request, errors);
-        setEmail(person, request, errors);
-        setPassword(person, request, errors);
-
-        if (errors.size() == 0) {
+        if (command != null) {
             try {
-                cts.addPerson(person);
-                return showHome(request, response);
-            } catch (DbException exc) {
-                errors.add(exc.getMessage());
+                RequestHandler handler = handlerFactory.getHandler(command, cts);
+                destination = handler.handleRequest(request, response);
+            } catch (Exception exc) {
+                request.setAttribute("error", exc.getMessage());
+                destination = "error.jsp";
             }
         }
-        request.setAttribute("errors", errors);
-        return "register.jsp";
+
+        request.getRequestDispatcher(destination).forward(request, response);
     }
 
-    private String showForm(HttpServletRequest request, HttpServletResponse response) {
-        return "register.jsp";
-    }
 
-    private String showOverview(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("users", cts.getPersons());
-        return "personoverview.jsp";
-    }
 
-    private String showHome(HttpServletRequest request, HttpServletResponse response) {
-        return "index.jsp";
-    }
+
+
 }
