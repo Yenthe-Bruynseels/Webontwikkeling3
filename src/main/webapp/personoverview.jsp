@@ -35,6 +35,7 @@
                 <td>${user.email}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
+                <td><a href="Controller?command=Delete&userid=${user.userid}"> Delete</a></td>
             </tr>
             </c:forEach>
 
