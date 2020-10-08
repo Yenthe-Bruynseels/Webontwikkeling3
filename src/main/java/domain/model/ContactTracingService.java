@@ -33,4 +33,9 @@ public class ContactTracingService {
     private PersonDbInMemory getPersonDb() {
         return personDb;
     }
+
+    public Person authenticate(String userid, String password) {
+        return getPersonDb().getPersonIfAuthenticated(userid, password);
+    }
+
 }

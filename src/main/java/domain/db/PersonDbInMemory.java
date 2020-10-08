@@ -13,7 +13,7 @@ public class PersonDbInMemory {
     public PersonDbInMemory() {
         Person administrator = new Person("admin", "admin@ucll.be", "t", "Ad", "Ministrator");
         Person yenthe = new Person("yenthe", "yenthe@thibault.islove", "jazekers", "Yen", "The");
-        Person thibault = new Person("thibault", "thibault@single.forever", "z&g=/=nietokay", "Thi", "Bault");
+        Person thibault = new Person("thibault", "thibault@single.forever", "z&g=/=okay", "Thi", "Bault");
         add(administrator);
         add(yenthe);
         add(thibault);
@@ -63,7 +63,7 @@ public class PersonDbInMemory {
 
     public Person getPersonIfAuthenticated(String personId, String password) {
         Person current = get(personId);
-        if (current.isCorrectPassword(password)) {
+        if (current != null && current.isCorrectPassword(password)) {
             return current;
         }
         return null;

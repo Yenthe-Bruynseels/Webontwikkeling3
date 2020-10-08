@@ -6,7 +6,7 @@
 <head>
 	<link rel="stylesheet" href="css/style.css">
 	<meta charset="UTF-8">
-	<title>Countries</title>
+	<title>error</title>
 </head>
 <body>
 <header>

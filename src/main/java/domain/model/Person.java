@@ -29,7 +29,7 @@ public class Person {
 		if(userid.trim().isEmpty()){
 			throw new DomainException("No userid given");
 		}
-		this.userid = userid;
+		this.userid = userid.toLowerCase();
 	}
 
 	public void setEmail(String email) {
