@@ -11,7 +11,7 @@ public class PersonDbInMemory {
     private Map<String, Person> persons = new HashMap<>();
 
     public PersonDbInMemory() {
-        Person administrator = new Person("admin", "admin@ucll.be", "t", "Ad", "Ministrator");
+        Person administrator = new Person("admin", "admin@ucll.be", "t", "Admini", "Strator");
         Person yenthe = new Person("yenthe", "yenthe@thibault.islove", "jazekers", "Yen", "The");
         Person thibault = new Person("thibault", "thibault@single.forever", "z&g=/=okay", "Thi", "Bault");
         add(administrator);

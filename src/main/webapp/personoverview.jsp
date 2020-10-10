@@ -30,13 +30,18 @@
                 <th>First Name</th>
                 <th>Last Name</th>
             </tr>
+
             <c:forEach var="user" items="${users}">
-            <tr>
-                <td>${user.email}</td>
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
-                <td><a href="Controller?command=Delete&userid=${user.userid}"> Delete</a></td>
-            </tr>
+                <tr>
+                    <td>${user.email}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <c:if test="${sessionScope.get('user').userid == 'admin'}">
+                        <c:if test="${user.userid != 'admin'}">
+                            <td><a href="Controller?command=Delete&userid=${user.userid}"> Delete</a></td>
+                        </c:if>
+                    </c:if>
+                </tr>
             </c:forEach>
 
             <caption>Users Overview</caption>
