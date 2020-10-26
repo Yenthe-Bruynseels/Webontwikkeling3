@@ -25,12 +25,12 @@ public class TestDB {
         connection.commit();
         ResultSet result = statement.getResultSet();
         while(result.next()){
-            String userid = result.getString("userid");
+            String userid = result.getString("userid").trim();
             // Waarom .trim() nodig? zonder valideert email niet. Denk mogelijks \t in string, aangezien andere velden strings trimmen, tabs weghaalt.
             String email = result.getString("email").trim();
-            String password = result.getString("password");
-            String firstName = result.getString("first name");
-            String lastName = result.getString("last name");
+            String password = result.getString("password").trim();
+            String firstName = result.getString("first name").trim();
+            String lastName = result.getString("last name").trim();
             try { // validation of data stored in database
                 Person person = new Person(userid, email, password, firstName, lastName);
                 System.out.println(person.toString());
