@@ -28,7 +28,7 @@ public class Person {
     public void setUserid(String userid) {
         userid = userid.trim();
         if (userid.trim().isEmpty()) {
-            throw new DomainException("No userid given");
+            throw new DomainException("No username given");
         }
         this.userid = userid.toLowerCase();
     }

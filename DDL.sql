@@ -9,7 +9,7 @@ SET search_path TO web3_project_r0748609; -- replace r123456 with your studentnr
 DROP TABLE IF EXISTS web3_project_r0748609.user; -- replace r123456 with your studentnr
 
 CREATE TABLE web3_project_r0748609.user ( -- replace r123456 with your studentnr
-                                            userid SERIAL PRIMARY KEY,
+                                            userid character varying(50) NOT NULL PRIMARY KEY,
                                             firstname character varying(32) NOT NULL,
                                             lastname character varying(32) NOT NULL,
                                             email character varying(64) NOT NULL,
@@ -38,6 +38,3 @@ GRANT ALL ON TABLE web3_project_r0748609.contact TO local_r0748609; -- replace r
 
 GRANT ALL ON SEQUENCE web3_project_r0748609.contact_id_seq TO lector WITH GRANT OPTION;
 GRANT ALL ON SEQUENCE web3_project_r0748609.contact_id_seq TO local_r0748609;
-
-GRANT ALL ON SEQUENCE web3_project_r0748609.user_userid_seq TO lector WITH GRANT OPTION;
-GRANT ALL ON SEQUENCE web3_project_r0748609.user_userid_seq TO local_r0748609;

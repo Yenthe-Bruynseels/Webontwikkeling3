@@ -38,7 +38,7 @@
 
         <form novalidate="novalidate" method="post" action="Controller?command=Add">
             <!-- novalidate in order to be able to run tests correctly -->
-            <p><label for="userid">User id</label><input type="text" id="userid" name="userid"
+            <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
                                                          required value="${useridPreviousValue}"></p>
             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
                                                                required value="${firstNamePreviousValue}"></p>
