@@ -16,21 +16,20 @@ public class TestDB {
         properties.setProperty("sslmode","prefer");
         properties.setProperty("allowMultiQueries","true");
         properties.setProperty("prepareThreshold","0");
-        String setSearchPath = "SET search_path = bruynseelsyenthe_web3;";
+        String setSearchPath = "SET search_path = web3_project_r0748609;";
         Connection connection = DriverManager.getConnection(url,properties);
         connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
         statement.execute(setSearchPath);
-        statement.executeQuery( "SELECT * FROM person;" );
+        statement.executeQuery( "SELECT * FROM web3_project_r0748609.user;" );
         connection.commit();
         ResultSet result = statement.getResultSet();
         while(result.next()){
-            String userid = result.getString("userid").trim();
-            // Waarom .trim() nodig? zonder valideert email niet. Denk mogelijks \t in string, aangezien andere velden strings trimmen, tabs weghaalt.
-            String email = result.getString("email").trim();
-            String password = result.getString("password").trim();
-            String firstName = result.getString("first name").trim();
-            String lastName = result.getString("last name").trim();
+            String userid = result.getString("userid");
+            String email = result.getString("email");
+            String password = result.getString("password");
+            String firstName = result.getString("firstname");
+            String lastName = result.getString("lastname");
             try { // validation of data stored in database
                 Person person = new Person(userid, email, password, firstName, lastName);
                 System.out.println(person.toString());

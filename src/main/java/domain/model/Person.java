@@ -26,6 +26,7 @@ public class Person {
     }
 
     public void setUserid(String userid) {
+        userid = userid.trim();
         if (userid.trim().isEmpty()) {
             throw new DomainException("No userid given");
         }
@@ -33,7 +34,8 @@ public class Person {
     }
 
     public void setEmail(String email) {
-        if (email.trim().isEmpty()) {
+        email = email.trim();
+        if (email.isEmpty()) {
             throw new DomainException("No email given");
         }
         String USERID_PATTERN =
@@ -75,7 +77,8 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.trim().isEmpty()) {
+        firstName = firstName.trim();
+        if (firstName.isEmpty()) {
             throw new DomainException("No firstname given");
         }
         this.firstName = firstName;
@@ -86,7 +89,8 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        if (lastName.trim().isEmpty()) {
+        lastName = lastName.trim();
+        if (lastName.isEmpty()) {
             throw new DomainException("No last name given");
         }
         this.lastName = lastName;
