@@ -59,14 +59,16 @@ public class Person {
     }
 
     public boolean isCorrectPassword(String password) {
-        if (password.trim().isEmpty()) {
+        password = password.trim();
+        if (password.isEmpty()) {
             throw new DomainException("No password given");
         }
         return getPassword().equals(password);
     }
 
     public void setPassword(String password) {
-        if (password.trim().isEmpty()) {
+        password = password.trim();
+        if (password.isEmpty()) {
             throw new DomainException("No password given");
         }
         this.password = password;
