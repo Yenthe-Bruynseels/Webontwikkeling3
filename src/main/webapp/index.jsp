@@ -42,7 +42,7 @@
             <c:when test="${sessionScope.get('user') == null}">
                 <form novalidate="novalidate" method="post" action="Controller?command=LogIn">
                     <!-- novalidate in order to be able to run tests correctly -->
-                    <p><label for="userid">User id</label>
+                    <p><label for="userid">Username</label>
                         <input type="text" id="userid" name="userid"
                                required></p>
                     <p><label for="password">Password</label>

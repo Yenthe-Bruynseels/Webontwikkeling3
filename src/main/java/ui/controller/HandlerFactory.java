@@ -1,6 +1,6 @@
 package ui.controller;
 
-import domain.model.ContactTracingService;
+import domain.service.ContactTracingService;
 
 public class HandlerFactory {
 
