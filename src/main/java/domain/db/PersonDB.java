@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersonDB {
     /**
-     * Stores the given country
+     * Stores the given person
      * @param person The person to be added
      * @throws DbException if the given person is null
      * @throws DbException if the given person can not be added
@@ -22,4 +22,9 @@ public interface PersonDB {
 
     List<Person> getAll();
 
+    Person get(String personId);
+
+    Person getPersonIfAuthenticated(String personId, String password);
+
+    void delete(String personId);
 }

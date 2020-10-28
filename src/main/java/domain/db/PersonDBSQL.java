@@ -30,7 +30,7 @@ public class PersonDBSQL implements PersonDB {
             statementSQL.setString(2, person.getFirstName());
             statementSQL.setString(3, person.getLastName());
             statementSQL.setString(4, person.getEmail());
-            statementSQL.setString(5, "password");
+            statementSQL.setString(5, person.getPassword());
             statementSQL.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -50,12 +50,60 @@ public class PersonDBSQL implements PersonDB {
                 String lastname = result.getString("lastname");
                 String email = result.getString("email");
                 String password = result.getString("password");
-                Person person = new Person(userid, firstname, lastname, email, password);
+                Person person = new Person(userid, email, password, firstname, lastname);
                 people.add(person);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage(), e);
         }
         return people;
+    }
+
+    @Override
+    public Person get(String personId) {
+        if (personId == null) throw new DbException("No id given");
+        Person person = null;
+        String sql = String.format("SELECT * FROM %s.user WHERE userid = ?", this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, personId);
+            ResultSet result = statementSql.executeQuery();
+            while (result.next()) {
+                String userid = result.getString("userid");
+                String firstname = result.getString("firstname");
+                String lastname = result.getString("lastname");
+                String email = result.getString("email");
+                String password = result.getString("password");
+                person = new Person(userid, email, password, firstname, lastname);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+        return person;
+    }
+
+    public void delete(String personId) {
+        if (personId == null) {
+            throw new DbException("No id given");
+        }
+
+        String sql = String.format("DELETE FROM %s.user WHERE userid = ?;", this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, personId);
+            statementSql.execute();
+        } catch (Exception e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
+    }
+
+    @Override
+    public Person getPersonIfAuthenticated(String personId, String password) {
+        Person current = get(personId);
+        if (current != null && current.isCorrectPassword(password)) {
+            return current;
+        }
+        return null;
     }
 }

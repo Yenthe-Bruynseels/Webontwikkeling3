@@ -40,7 +40,7 @@ public class PersonDbInMemory {
         persons.put(person.getUserid(), person);
     }
 
-    public void update(Person person) {
+    /*public void update(Person person) {
         if (person == null) {
             throw new DbException("No person given");
         }
@@ -48,7 +48,7 @@ public class PersonDbInMemory {
             throw new DbException("No person found");
         }
         persons.put(person.getUserid(), person);
-    }
+    }*/
 
     public void delete(String personId) {
         if (personId == null) {
@@ -57,9 +57,9 @@ public class PersonDbInMemory {
         persons.remove(personId);
     }
 
-    public int getNumberOfPersons() {
+/*    public int getNumberOfPersons() {
         return persons.size();
-    }
+    }*/
 
     public Person getPersonIfAuthenticated(String personId, String password) {
         Person current = get(personId);

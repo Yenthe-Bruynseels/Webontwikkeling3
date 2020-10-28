@@ -20,7 +20,22 @@ public class Add extends RequestHandler {
         setEmail(person, request, errors);
         setPassword(person, request, errors);
 
-        if (errors.size() == 0) {
+        if (errors.size() > 0) {
+            request.setAttribute("errors", errors);
+            return "register.jsp";
+        }
+
+        Person thePerson = service.getPerson(request.getParameter("userid"));
+        if (thePerson.getUserid() != null) {
+            errors.add("User already exists.");
+            request.setAttribute("errors", errors);
+            return "register.jsp";
+        } else {
+            service.addPerson(person);
+            return "Controller?command=Overview";
+        }
+
+        /*if (errors.size() == 0) {
             try {
                 service.addPerson(person);
                 return "Controller?command=Overview";
@@ -29,7 +44,7 @@ public class Add extends RequestHandler {
             }
         }
         request.setAttribute("errors", errors);
-        return "register.jsp";
+        return "register.jsp";*/
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {

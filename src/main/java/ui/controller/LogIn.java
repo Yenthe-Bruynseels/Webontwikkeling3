@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LogIn extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-/*
+
         String userid = request.getParameter("userid").toLowerCase();
         String password = request.getParameter("password");
 
@@ -19,7 +19,7 @@ public class LogIn extends RequestHandler {
         } else {
             request.getSession().setAttribute("user", user);
         }
-*/
+
         return "index.jsp";
     }
 }
