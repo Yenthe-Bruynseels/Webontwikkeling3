@@ -1,6 +1,7 @@
 package ui.view;
 
 import domain.model.Person;
+import util.Secret;
 
 import java.sql.*;
 import java.util.Properties;
@@ -9,8 +10,12 @@ public class TestDB {
     public static void main(String[] args) throws SQLException {
         Properties properties = new Properties();
         String url = "jdbc:postgresql://databanken.ucll.be:62021/2TX38";
-        properties.setProperty("user", "local_r0748609");
-        properties.setProperty("password", "ZnZX,9:$kw:Isu");
+        try {
+            Class.forName("util.Secret"); // implementation of abstract class Credentials
+            Secret.setPass(properties);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class util.Secret with credentials not found!");
+        }
         properties.setProperty("ssl", "true");
         properties.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
         properties.setProperty("sslmode","prefer");

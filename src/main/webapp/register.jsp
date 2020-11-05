@@ -16,7 +16,8 @@
         <nav>
             <ul>
                 <li><a href="Controller">Home</a></li>
-                <li><a href="Controller?command=Overview">Overview</a></li>
+                <li><a href="Controller?command=Overview">Users</a></li>
+                <li><a href="Controller?command=Contacts">Contacts</a></li>
                 <li id="actual"><a href="Controller?command=Register">Register</a></li>
             </ul>
         </nav>
@@ -36,7 +37,7 @@
             </div>
         </c:if>
 
-        <form novalidate="novalidate" method="post" action="Controller?command=Add">
+        <form novalidate="novalidate" method="post" action="Controller?command=AddUser">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
                                                          required value="${useridPreviousValue}"></p>

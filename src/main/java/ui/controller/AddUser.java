@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-public class Add extends RequestHandler {
+public class AddUser extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
@@ -26,7 +26,7 @@ public class Add extends RequestHandler {
         }
 
         Person thePerson = service.getPerson(request.getParameter("userid"));
-        if (thePerson.getUserid() != null) {
+        if (thePerson != null) {
             errors.add("User already exists.");
             request.setAttribute("errors", errors);
             return "register.jsp";
@@ -90,7 +90,7 @@ public class Add extends RequestHandler {
     private void setPassword(Person person, HttpServletRequest request, ArrayList<String> errors) {
         String password = request.getParameter("password");
         try {
-            person.setPassword(password);
+            person.setPasswordHashed(password);
             request.setAttribute("passwordPreviousValue", password);
         } catch (DomainException exc) {
             errors.add(exc.getMessage());

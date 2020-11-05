@@ -11,8 +11,12 @@ public class DBConnectionManager {
 
     private DBConnectionManager(String dbURL) {
         Properties dbProperties = new Properties();
-        dbProperties.setProperty("user", "local_r0748609");
-        dbProperties.setProperty("password", "ZnZX,9:$kw:Isu");
+        try {
+            Class.forName("util.Secret"); // implementation of abstract class Credentials
+            Secret.setPass(dbProperties);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class util.Secret with credentials not found!");
+        }
         dbProperties.setProperty("ssl", "true");
         dbProperties.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
         dbProperties.setProperty("sslmode", "prefer");

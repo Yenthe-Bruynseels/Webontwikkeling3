@@ -1,5 +1,9 @@
 package domain.model;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +67,7 @@ public class Person {
         if (password.isEmpty()) {
             throw new DomainException("No password given");
         }
-        return getPassword().equals(password);
+        return getPassword().equals(hashPassword(password));
     }
 
     public void setPassword(String password) {
@@ -72,6 +76,35 @@ public class Person {
             throw new DomainException("No password given");
         }
         this.password = password;
+    }
+
+    public void setPasswordHashed(String password) {
+        password = password.trim();
+        if (password.isEmpty()) {
+            throw new DomainException("No password given");
+        }
+        this.password = hashPassword(password);
+    }
+
+
+    private String hashPassword(String password) {
+        try {
+//create MessageDigest
+            MessageDigest crypt = MessageDigest.getInstance("SHA-512");
+//reset
+            crypt.reset();
+//update
+            byte[] passwordBytes = password.getBytes("UTF-8");
+            crypt.update(passwordBytes);
+//digest
+            byte[] digest = crypt.digest();
+//convert to String
+            BigInteger digestAsBigInteger = new BigInteger(1, digest);
+//return hashed password
+            return digestAsBigInteger.toString(16);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            throw new DomainException(e.getMessage(), e);
+        }
     }
 
     public String getFirstName() {
