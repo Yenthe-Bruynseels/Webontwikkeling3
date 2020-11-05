@@ -7,11 +7,11 @@ import domain.model.Person;
 
 import java.util.List;
 
-public class ContactTracingService {
+public class UserService {
     private PersonDB personDb = new PersonDBSQL();
     //private PersonDbInMemory personDb = new PersonDbInMemory();
 
-    public ContactTracingService() {
+    public UserService() {
     }
 
     public Person getPerson(String personId) {
