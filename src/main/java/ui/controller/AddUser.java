@@ -25,26 +25,15 @@ public class AddUser extends RequestHandler {
             return "register.jsp";
         }
 
-        Person thePerson = service.getPerson(request.getParameter("userid"));
+        Person thePerson = userService.getPerson(request.getParameter("userid"));
         if (thePerson != null) {
             errors.add("User already exists.");
             request.setAttribute("errors", errors);
             return "register.jsp";
         } else {
-            service.addPerson(person);
+            userService.addPerson(person);
             return "Controller?command=Overview";
         }
-
-        /*if (errors.size() == 0) {
-            try {
-                service.addPerson(person);
-                return "Controller?command=Overview";
-            } catch (DbException exc) {
-                errors.add(exc.getMessage());
-            }
-        }
-        request.setAttribute("errors", errors);
-        return "register.jsp";*/
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {

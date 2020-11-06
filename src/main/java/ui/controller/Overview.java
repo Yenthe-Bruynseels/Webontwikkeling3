@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Overview extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("users", service.getPersons());
+        request.setAttribute("users", userService.getPersons());
         return "personoverview.jsp";
     }
 }

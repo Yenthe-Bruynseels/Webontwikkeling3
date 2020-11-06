@@ -15,7 +15,7 @@
     </h1>
     <nav>
         <ul>
-            <li id="actual"><a href="Controller">Home</a></li>
+            <li><a href="Controller">Home</a></li>
             <li><a href="Controller?command=Overview">Users</a></li>
             <li><a href="Controller?command=Contacts">Contacts</a></li>
             <li><a href="Controller?command=Register">Register</a></li>

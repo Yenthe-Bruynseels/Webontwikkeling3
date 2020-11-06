@@ -2,14 +2,12 @@ package domain.service;
 
 import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
-import domain.db.PersonDbInMemory;
 import domain.model.Person;
 
 import java.util.List;
 
 public class UserService {
     private PersonDB personDb = new PersonDBSQL();
-    //private PersonDbInMemory personDb = new PersonDbInMemory();
 
     public UserService() {
     }

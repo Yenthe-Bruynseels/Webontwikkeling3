@@ -1,19 +1,17 @@
 package ui.controller;
 
-import domain.service.ContactTracingService;
+import domain.service.ContactService;
+import domain.service.UserService;
 
 public class HandlerFactory {
 
-    public RequestHandler getHandler(String handlerName, ContactTracingService model) {
+    public RequestHandler getHandler(String handlerName, UserService userService, ContactService contactService) {
         RequestHandler handler = null;
         try {
             Class handlerClass = Class.forName("ui.controller." + handlerName);
-            // Java 8/9
-            //Object handlerObject = handlerClass.newInstance();
-            // Java 10
             Object handlerObject = handlerClass.getConstructor().newInstance();
             handler = (RequestHandler) handlerObject;
-            handler.setModel(model);
+            handler.setModel(userService, contactService);
         } catch (Exception e) {
             throw new RuntimeException("Deze pagina bestaat niet!!!!");
         }

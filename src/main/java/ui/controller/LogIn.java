@@ -12,7 +12,7 @@ public class LogIn extends RequestHandler {
         String userid = request.getParameter("userid").toLowerCase();
         String password = request.getParameter("password");
 
-        Person user = service.authenticate(userid, password);
+        Person user = userService.authenticate(userid, password);
 
         if (user == null) {
             request.setAttribute("error", "No valid username/password");

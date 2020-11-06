@@ -7,7 +7,7 @@ public class Delete extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String userid = request.getParameter("userid");
-        service.deletePerson(userid);
+        userService.deletePerson(userid);
         return "Controller?command=Overview";
     }
 }

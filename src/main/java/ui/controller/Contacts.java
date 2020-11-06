@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Contacts extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("Contacts", service.getPersons());
-        return "personoverview.jsp";
+        request.setAttribute("contacts", contactService.getContacts());
+        return "contacts.jsp";
     }
 }

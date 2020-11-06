@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS web3_project_r0748609.contact; -- replace r123456 with your
 
 CREATE TABLE web3_project_r0748609.contact ( -- replace r123456 with your studentnr
                                                id SERIAL PRIMARY KEY,
-                                               person_id integer NULL,
+                                               person_id character varying NULL,
                                                firstname character varying(32) NOT NULL,
                                                lastname character varying(32) NOT NULL,
                                                email character varying(64) NOT NULL,
