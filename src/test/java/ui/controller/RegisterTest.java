@@ -1,3 +1,5 @@
+package ui.controller;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -17,9 +19,6 @@ public class RegisterTest {
 
     @Before
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
-        // windows: gebruik dubbele \\ om pad aan te geven
-        // hint: zoek een werkende test op van web 2 ...
         System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(path + "?command=Register");
@@ -58,7 +57,7 @@ public class RegisterTest {
         assertEquals("Sign Up", title);
 
         WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
-        assertEquals("No userid given", errorMsg.getText());
+        assertEquals("No username given", errorMsg.getText());
 
         WebElement fieldUserid = driver.findElement(By.id("userid"));
         assertEquals("", fieldUserid.getAttribute("value"));
@@ -176,7 +175,7 @@ public class RegisterTest {
         submitForm(useridRandom, "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 
         WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
-        assertEquals("User already exists", errorMsg.getText());
+        assertEquals("User already exists.", errorMsg.getText());
 
         WebElement fieldUserid = driver.findElement(By.id("userid"));
         assertEquals(useridRandom, fieldUserid.getAttribute("value"));

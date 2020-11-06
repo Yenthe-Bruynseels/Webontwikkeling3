@@ -23,4 +23,8 @@ public class ContactService {
     public void addContact(Contact contact) {
         getContactDb().add(contact);
     }
+
+    public void deleteContact(int id) {
+        getContactDb().delete(id);
+    }
 }

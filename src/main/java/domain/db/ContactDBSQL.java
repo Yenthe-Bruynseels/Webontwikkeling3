@@ -51,12 +51,27 @@ public class ContactDBSQL implements ContactDB {
                 String email = result.getString("email");
                 String phonenumber = result.getString("phonenumber");
                 Timestamp date = result.getTimestamp("date");
+                int id = result.getInt("id");
                 Contact contact = new Contact(firstName, lastName, date, phonenumber, email);
+                contact.setId(id);
                 contacts.add(contact);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage(), e);
         }
         return contacts;
+    }
+
+    @Override
+    public void delete(int contactID) {
+        String sql = String.format("DELETE FROM %s.contact WHERE id = ?;", this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setInt(1, contactID);
+            statementSql.execute();
+        } catch (Exception e) {
+            throw new DbException(e.getMessage(), e);
+        }
+
     }
 }

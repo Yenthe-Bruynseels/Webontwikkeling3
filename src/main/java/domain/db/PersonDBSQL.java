@@ -81,7 +81,7 @@ public class PersonDBSQL implements PersonDB {
         }
         return person;
     }
-
+    @Override
     public void delete(String personId) {
         if (personId == null) {
             throw new DbException("No id given");

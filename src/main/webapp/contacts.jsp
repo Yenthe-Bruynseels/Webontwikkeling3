@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Home</title>
+    <title>Contacts</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -37,6 +37,7 @@
                 </ul>
             </div>
         </c:if>
+
         <table>
             <tr>
                 <th>Date</th>
@@ -49,6 +50,9 @@
                     <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
                     <td><fmt:formatDate pattern="HH:mm:ss" value="${contact.timestamp}"/></td>
                     <td>${contact.firstName} ${contact.lastName}</td>
+                    <c:if test="${sessionScope.get('user').userid == 'admin'}">
+                            <td><a href="Controller?command=DeleteContact&id=${contact.id}">Delete</a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
             <caption>Contact Overview</caption>
@@ -62,11 +66,12 @@
                                                              required value="${lastNamePreviousValue}"></p>
             <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"></p>
             <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required value="${prevHour}"></p>
-            <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required type="tel" placeholder="+32"
-                                                            value="${phonenumberPreviousValue}"></p>
+            <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required
+                                                                   type="tel" placeholder="+32"
+                                                                   value="${phonenumberPreviousValue}"></p>
             <p><label for="email">Email</label><input type="email" id="email" name="email" required
                                                       value="${emailPreviousValue}"></p>
-            <p><input type="submit" id="submit" value="Add Contact"></p>
+            <p><input type="submit" id="addContact" value="Add Contact"></p>
 
         </form>
 

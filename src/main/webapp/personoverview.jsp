@@ -39,7 +39,7 @@
                     <td>${user.lastName}</td>
                     <c:if test="${sessionScope.get('user').userid == 'admin'}">
                         <c:if test="${user.userid != 'admin'}">
-                            <td><a href="Controller?command=Delete&userid=${user.userid}"> Delete</a></td>
+                            <td><a href="Controller?command=Delete&userid=${user.userid}">Delete</a></td>
                         </c:if>
                     </c:if>
                 </tr>

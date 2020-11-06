@@ -9,4 +9,6 @@ public interface ContactDB {
     void add(Contact contact);
 
     List<Contact> getAll();
+
+    void delete(int contactId);
 }

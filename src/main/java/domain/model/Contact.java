@@ -10,6 +10,7 @@ public class Contact {
     private Timestamp timestamp;
     private String phonenumber;
     private String email;
+    private int id;
 
     public Contact(String firstName, String lastName, Timestamp timestamp, String phonenumber, String email) {
         setFirstName(firstName);
@@ -17,9 +18,18 @@ public class Contact {
         setTimestamp(timestamp);
         setPhonenumber(phonenumber);
         setEmail(email);
+
     }
 
     public Contact() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getFirstName() {

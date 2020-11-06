@@ -34,7 +34,7 @@ public class AddContact extends RequestHandler {
             }
         }
         request.setAttribute("errors", errors);
-        return "contacts.jsp";
+        return "Controller?command=Contacts";
     }
 
     private void clearPreviousValues(HttpServletRequest request) {
