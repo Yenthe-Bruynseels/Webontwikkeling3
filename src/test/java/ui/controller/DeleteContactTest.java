@@ -84,7 +84,7 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons3 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons3.size());
-        submitAddContactForm("Yenthe7", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
+        submitAddContactForm("Thibault", "Magnini", "10042020", "0809PM", "+32492606838", "thibie@test.be");
         List<WebElement> deleteButtons4 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons4.size());
 
@@ -98,7 +98,7 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
-        submitAddContactForm("Yenthe8", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
+        submitAddContactForm("Yenthe8", "Bruynseels", "09042020", "0808PM", "+32492606837", "yenthe@test.be");
         List<WebElement> deleteButtons2 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons2.size());
 
