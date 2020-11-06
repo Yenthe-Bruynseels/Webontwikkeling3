@@ -36,11 +36,11 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
-        submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe@test.be");
-        submitAddContactForm("Yenthe2", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe2@test.be");
-        submitAddContactForm("Yenthe3", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe3@test.be");
-        submitAddContactForm("Yenthe4", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe4@test.be");
-        submitAddContactForm("Yenthe5", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe5@test.be");
+        submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
+        submitAddContactForm("Yenthe2", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe2@test.be");
+        submitAddContactForm("Yenthe3", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe3@test.be");
+        submitAddContactForm("Yenthe4", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe4@test.be");
+        submitAddContactForm("Yenthe5", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe5@test.be");
         List<WebElement> deleteButtons2 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons2.size());
 
@@ -51,7 +51,7 @@ public class DeleteContactTest {
     public void test_AdminDeletesContact() {
         submitLogInForm("admin", "t");
         driver.get(path + "?command=Contacts");
-        submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe@test.be"); // This is done, just to be sure that there will always be at least 1 contact in the database for if test would be run on it's own multiple times.
+        submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be"); // This is done, just to be sure that there will always be at least 1 contact in the database for if test would be run on it's own multiple times.
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']")); //puts all delete buttons in a list
         System.out.println(deleteButtons1.size());
         deleteButtons1.get(0).click(); // clicks the first delete button found in the list
@@ -69,7 +69,7 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
-        submitAddContactForm("Yenthe6", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe@test.be");
+        submitAddContactForm("Yenthe6", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
         List<WebElement> deleteButtons2 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons2.size());
 
@@ -84,7 +84,7 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons3 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons3.size());
-        submitAddContactForm("Yenthe7", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe@test.be");
+        submitAddContactForm("Yenthe7", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
         List<WebElement> deleteButtons4 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons4.size());
 
@@ -98,7 +98,7 @@ public class DeleteContactTest {
         driver.get(path + "?command=Contacts");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
-        submitAddContactForm("Yenthe8", "Bruynseels", "09042020", "0808PM", "0492606838", "yenthe@test.be");
+        submitAddContactForm("Yenthe8", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
         List<WebElement> deleteButtons2 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons2.size());
 
