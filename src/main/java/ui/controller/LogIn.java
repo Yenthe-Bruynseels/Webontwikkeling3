@@ -9,7 +9,7 @@ public class LogIn extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 
-        String userid = request.getParameter("userid").toLowerCase();
+        String userid = request.getParameter("userid").trim().toLowerCase();
         String password = request.getParameter("password");
 
         Person user = userService.authenticate(userid, password);

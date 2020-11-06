@@ -69,7 +69,9 @@ public class Contact {
     }
 
     public void setPhonenumber(String phonenumber) {
-        if (phonenumber.trim().isEmpty()) throw new DomainException("Phone number can't be empty.");
+        phonenumber = phonenumber.trim();
+        if (phonenumber.isEmpty()) throw new DomainException("Phone number can't be empty.");
+        if (!phonenumber.matches("[+]324\\d{8}")) throw new DomainException("Invalid phone number");
         this.phonenumber = phonenumber;
     }
 

@@ -25,7 +25,7 @@ public class AddUser extends RequestHandler {
             return "register.jsp";
         }
 
-        Person thePerson = userService.getPerson(request.getParameter("userid"));
+        Person thePerson = userService.getPerson(request.getParameter("userid").trim().toLowerCase());
         if (thePerson != null) {
             errors.add("User already exists.");
             request.setAttribute("errors", errors);
