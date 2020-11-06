@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class AddContact extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        ArrayList<String> errors = new ArrayList<String>();
+        ArrayList<String> errors = new ArrayList<>();
 
         Contact contact = new Contact();
         setFirstName(contact, request, errors);
@@ -62,8 +62,8 @@ public class AddContact extends RequestHandler {
             String hour = request.getParameter("hour");
             String timestampPattern = "yyyy-M-d HH:mm";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timestampPattern);
-            LocalDateTime dateTime = null;
-            Timestamp timestamp = null;
+            LocalDateTime dateTime;
+            Timestamp timestamp;
 
             request.setAttribute("prevHour", hour);
             request.setAttribute("prevDate", date);

@@ -18,7 +18,6 @@ public class Contact {
         setTimestamp(timestamp);
         setPhonenumber(phonenumber);
         setEmail(email);
-
     }
 
     public Contact() {
