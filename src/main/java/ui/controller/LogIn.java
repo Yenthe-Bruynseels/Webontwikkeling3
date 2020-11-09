@@ -2,12 +2,14 @@ package ui.controller;
 
 import domain.model.Person;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class LogIn extends RequestHandler {
     @Override
-    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String userid = request.getParameter("userid").trim().toLowerCase();
         String password = request.getParameter("password");
@@ -19,7 +21,7 @@ public class LogIn extends RequestHandler {
         } else {
             request.getSession().setAttribute("user", user);
         }
-
-        return "index.jsp";
+        request.getRequestDispatcher("index.jsp").forward(request,response);
+        //return "index.jsp";
     }
 }

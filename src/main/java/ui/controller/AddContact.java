@@ -4,8 +4,10 @@ import domain.db.DbException;
 import domain.model.Contact;
 import domain.model.DomainException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 
 public class AddContact extends RequestHandler {
     @Override
-    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<String> errors = new ArrayList<>();
 
         Contact contact = new Contact();
@@ -28,13 +30,15 @@ public class AddContact extends RequestHandler {
             try {
                 contactService.addContact(contact);
                 clearPreviousValues(request);
-                return "Controller?command=Contacts";
+                //return "Controller?command=Contacts";
+                request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
         request.setAttribute("errors", errors);
-        return "Controller?command=Contacts";
+        request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+        //return "Controller?command=Contacts";
     }
 
     private void clearPreviousValues(HttpServletRequest request) {

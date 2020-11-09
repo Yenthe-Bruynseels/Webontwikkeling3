@@ -103,7 +103,9 @@ public class Person {
 //return hashed password
             return digestAsBigInteger.toString(16);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            throw new DomainException(e.getMessage(), e);
+            System.out.println(e.getMessage());
+            System.out.println(e.getStackTrace()[0]);
+            throw new DomainException("Er liep iets fout bij het hashen. Please try again.");
         }
     }
 

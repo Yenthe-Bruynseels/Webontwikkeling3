@@ -1,16 +1,17 @@
 package ui.controller;
 
-import domain.db.DbException;
 import domain.model.DomainException;
 import domain.model.Person;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddUser extends RequestHandler {
     @Override
-    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<String> errors = new ArrayList<String>();
 
         Person person = new Person();
@@ -22,17 +23,20 @@ public class AddUser extends RequestHandler {
 
         if (errors.size() > 0) {
             request.setAttribute("errors", errors);
-            return "register.jsp";
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            //return "register.jsp";
         }
 
         Person thePerson = userService.getPerson(request.getParameter("userid").trim().toLowerCase());
         if (thePerson != null) {
             errors.add("User already exists.");
             request.setAttribute("errors", errors);
-            return "register.jsp";
+            request.getRequestDispatcher("register.jsp").forward(request,response);
+            //return "register.jsp";
         } else {
             userService.addPerson(person);
-            return "Controller?command=Overview";
+            request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
+            //return "Controller?command=Overview";
         }
     }
 
