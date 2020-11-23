@@ -1,7 +1,6 @@
 package ui.controller;
 
-import domain.service.ContactService;
-import domain.service.UserService;
+import domain.service.ContactTracingService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
-    UserService us = new UserService();
-    ContactService cs = new ContactService();
+    ContactTracingService cts = new ContactTracingService();
     private HandlerFactory handlerFactory = new HandlerFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +28,7 @@ public class Controller extends HttpServlet {
 
         if (command != null) {
             try {
-                RequestHandler handler = handlerFactory.getHandler(command, us, cs);
+                RequestHandler handler = handlerFactory.getHandler(command,cts);
                 handler.handleRequest(request, response);
             } catch (Exception exc) {
                 request.setAttribute("error", exc.getMessage());

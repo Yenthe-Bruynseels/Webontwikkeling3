@@ -1,15 +1,18 @@
 package domain.service;
 
+import domain.db.ContactDB;
+import domain.db.ContactDBSQL;
 import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
+import domain.model.Contact;
 import domain.model.Person;
 
 import java.util.List;
 
-public class UserService {
+public class ContactTracingService {
     private PersonDB personDb = new PersonDBSQL();
 
-    public UserService() {
+    public ContactTracingService() {
     }
 
     public Person getPerson(String personId) {
@@ -38,6 +41,27 @@ public class UserService {
 
     public Person authenticate(String userid, String password) {
         return getPersonDb().getPersonIfAuthenticated(userid, password);
+    }
+
+
+//-----------------------------------------------------------------------------------------------------------------------------//
+
+    private ContactDB contactDB = new ContactDBSQL();
+
+    public List<Contact> getContacts() {
+        return getContactDb().getAll();
+    }
+
+    private ContactDB getContactDb() {
+        return contactDB;
+    }
+
+    public void addContact(Contact contact) {
+        getContactDb().add(contact);
+    }
+
+    public void deleteContact(int id) {
+        getContactDb().delete(id);
     }
 
 }

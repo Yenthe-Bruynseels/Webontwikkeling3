@@ -9,7 +9,7 @@ public class DeleteContact extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        contactService.deleteContact(id);
+        cts.deleteContact(id);
         request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
         //return "Controller?command=Contacts";
     }

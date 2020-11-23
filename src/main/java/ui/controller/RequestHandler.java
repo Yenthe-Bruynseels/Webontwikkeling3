@@ -1,7 +1,6 @@
 package ui.controller;
 
-import domain.service.ContactService;
-import domain.service.UserService;
+import domain.service.ContactTracingService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +9,12 @@ import java.io.IOException;
 
 public abstract class RequestHandler {
 
-    protected UserService userService;
-    protected ContactService contactService;
+    protected ContactTracingService cts;
 
     public abstract void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
-    public void setModel(UserService userService, ContactService contactService) {
-        this.userService = userService;
-        this.contactService = contactService;
+    public void setModel(ContactTracingService cts) {
+        this.cts = cts;
     }
 
 

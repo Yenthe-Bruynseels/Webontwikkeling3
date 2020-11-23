@@ -14,14 +14,15 @@ public class LogIn extends RequestHandler {
         String userid = request.getParameter("userid").trim().toLowerCase();
         String password = request.getParameter("password");
 
-        Person user = userService.authenticate(userid, password);
+        Person user = cts.authenticate(userid, password);
 
         if (user == null) {
             request.setAttribute("error", "No valid username/password");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         } else {
             request.getSession().setAttribute("user", user);
+            response.sendRedirect("Controller?command=Home");
         }
-        request.getRequestDispatcher("index.jsp").forward(request,response);
         //return "index.jsp";
     }
 }

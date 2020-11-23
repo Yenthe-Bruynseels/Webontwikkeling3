@@ -27,14 +27,14 @@ public class AddUser extends RequestHandler {
             //return "register.jsp";
         }
 
-        Person thePerson = userService.getPerson(request.getParameter("userid").trim().toLowerCase());
+        Person thePerson = cts.getPerson(request.getParameter("userid").trim().toLowerCase());
         if (thePerson != null) {
             errors.add("User already exists.");
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("register.jsp").forward(request,response);
             //return "register.jsp";
         } else {
-            userService.addPerson(person);
+            cts.addPerson(person);
             request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
             //return "Controller?command=Overview";
         }

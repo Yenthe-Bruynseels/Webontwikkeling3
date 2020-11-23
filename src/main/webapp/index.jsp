@@ -40,7 +40,7 @@
             </div>
         </c:if>
         <c:choose>
-            <c:when test="${sessionScope.get('user') == null}">
+            <c:when test="${user == null}">
                 <form novalidate="novalidate" method="post" action="Controller?command=LogIn">
                     <!-- novalidate in order to be able to run tests correctly -->
                     <p><label for="userid">Username</label>
@@ -54,7 +54,7 @@
                 </form>
             </c:when>
             <c:otherwise>
-                <p> Welcome, ${sessionScope.get('user').firstName}</p>
+                <p> Welcome, ${user.firstName}</p>
                 <form novalidate="novalidate" method="post" action="Controller?command=LogOut">
                     <p><input type="submit" id="logOut" value="Log Out"></p>
                 </form>

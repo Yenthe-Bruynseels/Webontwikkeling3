@@ -28,7 +28,7 @@ public class AddContact extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                contactService.addContact(contact);
+                cts.addContact(contact);
                 clearPreviousValues(request);
                 //return "Controller?command=Contacts";
                 request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);

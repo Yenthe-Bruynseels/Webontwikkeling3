@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Contacts extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("contacts", contactService.getContacts());
+        request.setAttribute("contacts", cts.getContacts());
         request.getRequestDispatcher("contacts.jsp").forward(request,response);
         //return "contacts.jsp";
     }
