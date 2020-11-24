@@ -35,7 +35,8 @@ public class AddUser extends RequestHandler {
             //return "register.jsp";
         } else {
             cts.addPerson(person);
-            request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
+            response.sendRedirect("Controller?command=Overview");
+            //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
             //return "Controller?command=Overview";
         }
     }

@@ -18,7 +18,7 @@ public class DeleteContactTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(path); // We don't open our Contacts page with the setUp method because most of the tests require a user to log in. We don't log in our user in the setUp method because we need different users in different tests.
     }

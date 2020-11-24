@@ -31,13 +31,15 @@ public class AddContact extends RequestHandler {
                 cts.addContact(contact);
                 clearPreviousValues(request);
                 //return "Controller?command=Contacts";
-                request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+                response.sendRedirect("Controller?command=Contacts");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
-        request.setAttribute("errors", errors);
-        request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+        else {
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+        }
         //return "Controller?command=Contacts";
     }
 

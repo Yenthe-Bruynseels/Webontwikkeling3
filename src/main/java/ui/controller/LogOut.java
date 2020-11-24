@@ -9,7 +9,8 @@ public class LogOut extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.sendRedirect("Controller?command=Home");
+        //request.getRequestDispatcher("index.jsp").forward(request, response);
         //return "index.jsp";
     }
 }

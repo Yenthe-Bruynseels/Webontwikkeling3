@@ -14,7 +14,7 @@ public class SeleniumWorksWellTest {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://nl.wikipedia.org/wiki/Hoofdpagina");
     }

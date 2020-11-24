@@ -10,7 +10,8 @@ public class Delete extends RequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userid = request.getParameter("userid");
         cts.deletePerson(userid);
-        request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
+        response.sendRedirect("Controller?command=Overview");
+        //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
         //return "Controller?command=Overview";
     }
 }

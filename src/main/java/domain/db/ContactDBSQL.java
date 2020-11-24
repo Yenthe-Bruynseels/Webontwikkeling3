@@ -41,7 +41,7 @@ public class ContactDBSQL implements ContactDB {
     @Override
     public List<Contact> getAll() {
         List<Contact> contacts = new ArrayList<Contact>();
-        String sql = String.format("SELECT * FROM %s.contact", this.schema);
+        String sql = String.format("SELECT * FROM %s.contact ORDER BY date", this.schema);
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
