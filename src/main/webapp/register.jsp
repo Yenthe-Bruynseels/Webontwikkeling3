@@ -40,15 +40,14 @@
         <form novalidate="novalidate" method="post" action="Controller?command=AddUser">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
-                                                         required value="${useridPreviousValue}"></p>
+                                                          required value="<c:out value='${useridPreviousValue}'/>" /></p>
             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                               required value="${firstNamePreviousValue}"></p>
+                                                               required value="<c:out value='${firstNamePreviousValue}'/>"/></p>
             <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                             required value="${lastNamePreviousValue}"></p>
-            <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                      value="${emailPreviousValue}"></p>
+                                                             required value="<c:out value='${lastNamePreviousValue}'/>"/></p>
+            <p><label for="email">Email</label><input type="email" id="email" name="email" required value="<c:out value='${emailPreviousValue}'/>"/></p>
             <p><label for="password">Password</label><input type="password" id="password" name="password"
-                                                            required value="${passwordPreviousValue}"></p>
+                                                            required value="<c:out value='${passwordPreviousValue}'/>"/></p>
             <p><input type="submit" id="signUp" value="Sign Up"></p>
 
         </form>

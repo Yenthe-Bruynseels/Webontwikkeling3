@@ -54,7 +54,8 @@
                 </form>
             </c:when>
             <c:otherwise>
-                <p> Welcome, ${user.firstName}</p>
+                <%--<p> Welcome, ${user.firstName}</p>--%>
+                <p>Welcome, <c:out value="${user.firstName}"/></p>
                 <form novalidate="novalidate" method="post" action="Controller?command=LogOut">
                     <p><input type="submit" id="logOut" value="Log Out"></p>
                 </form>

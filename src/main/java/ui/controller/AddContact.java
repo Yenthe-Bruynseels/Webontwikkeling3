@@ -34,6 +34,8 @@ public class AddContact extends RequestHandler {
                 response.sendRedirect("Controller?command=Contacts");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
+                request.setAttribute("errors", errors);
+                request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
             }
         }
         else {

@@ -49,7 +49,7 @@
                 <tr>
                     <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
                     <td><fmt:formatDate pattern="HH:mm:ss" value="${contact.timestamp}"/></td>
-                    <td>${contact.firstName} ${contact.lastName}</td>
+                    <td><c:out value="${contact.firstName} ${contact.lastName}"/></td>
                     <c:if test="${sessionScope.get('user').userid == 'admin'}">
                             <td><a href="Controller?command=DeleteContact&id=${contact.id}">Delete</a></td>
                     </c:if>
@@ -61,16 +61,16 @@
         <form novalidate="novalidate" method="post" action="Controller?command=AddContact">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                               required value="${firstNamePreviousValue}"></p>
+                                                               required value="<c:out value="${firstNamePreviousValue}"/>"/></p>
             <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                             required value="${lastNamePreviousValue}"></p>
-            <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"></p>
-            <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required value="${prevHour}"></p>
+                                                             required value="<c:out value="${lastNamePreviousValue}"/>" /></p>
+            <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"/></p>
+            <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required value="${prevHour}"/></p>
             <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required
                                                                    type="tel" placeholder="+32"
-                                                                   value="${phonenumberPreviousValue}"></p>
+                                                                   value="${phonenumberPreviousValue}"/></p>
             <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                      value="${emailPreviousValue}"></p>
+                                                      value="${emailPreviousValue}"/></p>
             <p><input type="submit" id="addContact" value="Add Contact"></p>
 
         </form>
