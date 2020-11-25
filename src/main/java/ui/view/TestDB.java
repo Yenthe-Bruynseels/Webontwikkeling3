@@ -1,6 +1,7 @@
 package ui.view;
 
 import domain.model.Person;
+import domain.model.Role;
 import util.Secret;
 
 import java.sql.*;
@@ -35,8 +36,10 @@ public class TestDB {
             String password = result.getString("password");
             String firstName = result.getString("firstname");
             String lastName = result.getString("lastname");
+            Role role = Role.valueOf(result.getString("role").toUpperCase());
             try { // validation of data stored in database
                 Person person = new Person(userid, email, password, firstName, lastName);
+                person.setRole(role);
                 System.out.println(person.toString());
             }
             catch (IllegalArgumentException e) {

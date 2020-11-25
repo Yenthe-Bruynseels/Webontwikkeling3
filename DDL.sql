@@ -10,10 +10,11 @@ DROP TABLE IF EXISTS web3_project_r0748609.user; -- replace r123456 with your st
 
 CREATE TABLE web3_project_r0748609.user ( -- replace r123456 with your studentnr
                                             userid character varying(50) PRIMARY KEY,
-                                            firstname character varying(32) NOT NULL,
-                                            lastname character varying(32) NOT NULL,
+                                            firstname character varying(50) NOT NULL,
+                                            lastname character varying(50) NOT NULL,
                                             email character varying(64) NOT NULL,
-                                            password character (128) NOT NULL
+                                            password character (128) NOT NULL,
+                                            role character varying(32) DEFAULT 'Customer' NULL
 );
 
 GRANT ALL ON TABLE web3_project_r0748609.user TO lector WITH GRANT OPTION; -- replace r123456 with your studentnr
@@ -25,8 +26,8 @@ DROP TABLE IF EXISTS web3_project_r0748609.contact; -- replace r123456 with your
 CREATE TABLE web3_project_r0748609.contact ( -- replace r123456 with your studentnr
                                                id SERIAL PRIMARY KEY,
                                                person_id character varying NULL,
-                                               firstname character varying(32) NOT NULL,
-                                               lastname character varying(32) NOT NULL,
+                                               firstname character varying(50) NOT NULL,
+                                               lastname character varying(50) NOT NULL,
                                                email character varying(64) NOT NULL,
                                                phonenumber character varying(15) NOT NULL,
                                                date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL

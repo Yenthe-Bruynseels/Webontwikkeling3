@@ -29,7 +29,7 @@ public class AddContact extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 cts.addContact(contact);
-                clearPreviousValues(request);
+                //clearPreviousValues(request);
                 //return "Controller?command=Contacts";
                 response.sendRedirect("Controller?command=Contacts");
             } catch (DbException exc) {
@@ -45,14 +45,14 @@ public class AddContact extends RequestHandler {
         //return "Controller?command=Contacts";
     }
 
-    private void clearPreviousValues(HttpServletRequest request) {
-        request.removeAttribute("phonenumberPreviousValue");
+    /*private void clearPreviousValues(HttpServletRequest request) {
+        request.removeAttr ibute("phonenumberPreviousValue");
         request.removeAttribute("prevHour");
         request.removeAttribute("prevDate");
         request.removeAttribute("emailPreviousValue");
         request.removeAttribute("firstNamePreviousValue");
         request.removeAttribute("lastNamePreviousValue");
-    }
+    }*/
 
     private void setPhonenumber(Contact contact, HttpServletRequest request, ArrayList<String> errors) {
         String phonenumber = request.getParameter("phonenumber");

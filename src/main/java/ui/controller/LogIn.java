@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.model.Person;
+import domain.model.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

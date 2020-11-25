@@ -1,6 +1,7 @@
 package domain.db;
 
 import domain.model.Person;
+import domain.model.Role;
 import util.DbConnectionService;
 
 import java.sql.*;
@@ -74,7 +75,9 @@ public class PersonDBSQL implements PersonDB {
                 String lastname = result.getString("lastname");
                 String email = result.getString("email");
                 String password = result.getString("password");
+                Role role = Role.valueOf(result.getString("role").toUpperCase());
                 person = new Person(userid, email, password, firstname, lastname);
+                person.setRole(role);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage(), e);
