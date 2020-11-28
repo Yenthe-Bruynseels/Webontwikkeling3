@@ -23,7 +23,7 @@ public class ContactDBSQL implements ContactDB {
         if (contact == null) {
             throw new DbException("Nothing to add.");
         }
-        String sql = String.format("INSERT INTO %s.contact ( firstname, lastname, email, phonenumber, date) VALUES (?, ?, ?, ?, ?)", this.schema);
+        String sql = String.format("INSERT INTO %s.contact ( firstname, lastname, email, phonenumber, date, user_id) VALUES (?, ?, ?, ?, ?, ?)", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
@@ -32,6 +32,7 @@ public class ContactDBSQL implements ContactDB {
             statementSQL.setString(3, contact.getEmail());
             statementSQL.setString(4, contact.getPhonenumber());
             statementSQL.setTimestamp(5, contact.getTimestamp());
+            statementSQL.setString(6,contact.getUserid());
             statementSQL.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -39,7 +40,7 @@ public class ContactDBSQL implements ContactDB {
     }
 
     @Override
-    public List<Contact> getAll() {
+    public List<Contact> getAllAdmin() {
         List<Contact> contacts = new ArrayList<Contact>();
         String sql = String.format("SELECT * FROM %s.contact ORDER BY date", this.schema);
         try {
@@ -52,7 +53,32 @@ public class ContactDBSQL implements ContactDB {
                 String phonenumber = result.getString("phonenumber");
                 Timestamp date = result.getTimestamp("date");
                 int id = result.getInt("id");
-                Contact contact = new Contact(firstName, lastName, date, phonenumber, email);
+                String userid = result.getString("person_id");
+                Contact contact = new Contact(firstName, lastName, date, phonenumber, email, userid);
+                contact.setId(id);
+                contacts.add(contact);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+        return contacts;
+    }
+
+    @Override
+    public List<Contact> getAllContactsFromUser(String userid) {
+        List<Contact> contacts = new ArrayList<Contact>();
+        String sql = String.format("SELECT * FROM %s.contact WHERE user_id = '%s' ORDER BY date ", this.schema, userid);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            ResultSet result = statementSql.executeQuery();
+            while (result.next()) {
+                String firstName = result.getString("firstname");
+                String lastName = result.getString("lastname");
+                String email = result.getString("email");
+                String phonenumber = result.getString("phonenumber");
+                Timestamp date = result.getTimestamp("date");
+                int id = result.getInt("id");
+                Contact contact = new Contact(firstName, lastName, date, phonenumber, email, userid);
                 contact.setId(id);
                 contacts.add(contact);
             }

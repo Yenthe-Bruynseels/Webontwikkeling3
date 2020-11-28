@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Register Test</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -25,13 +25,13 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
+                    <li id="actual"><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
                 </c:if>
-                <li id="actual"><a href="Controller?command=Register">Register</a></li>
+                <li><a href="Controller?command=Register">Register</a></li>
             </ul>
         </nav>
         <h2>
-            Register
+            Register Positive Test
         </h2>
 
     </header>
@@ -46,20 +46,15 @@
             </div>
         </c:if>
 
-        <form novalidate="novalidate" method="post" action="Controller?command=AddUser">
+        <form novalidate="novalidate" method="post" action="Controller?command=RegisterPositiveTest">
             <!-- novalidate in order to be able to run tests correctly -->
-            <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
-                                                          required value="<c:out value='${useridPreviousValue}'/>" /></p>
-            <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                               required value="<c:out value='${firstNamePreviousValue}'/>"/></p>
-            <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                             required value="<c:out value='${lastNamePreviousValue}'/>"/></p>
-            <p><label for="email">Email</label><input type="email" id="email" name="email" required value="<c:out value='${emailPreviousValue}'/>"/></p>
-            <p><label for="password">Password</label><input type="password" id="password" name="password"
-                                                            required value="<c:out value='${passwordPreviousValue}'/>"/></p>
-            <p><input type="submit" id="signUp" value="Sign Up"></p>
+            <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"/></p>
+            <input type="hidden" id="userid" name="userid" value="${user.userid}">
+            <p><input type="submit" id="RegisterPositiveTest" value="Register Test"></p>
 
         </form>
+
+
     </main>
     <footer>
         &copy; Webontwikkeling 3, UC Leuven-Limburg
@@ -67,3 +62,4 @@
 </div>
 </body>
 </html>
+

@@ -1,11 +1,9 @@
 package domain.service;
 
-import domain.db.ContactDB;
-import domain.db.ContactDBSQL;
-import domain.db.PersonDB;
-import domain.db.PersonDBSQL;
+import domain.db.*;
 import domain.model.Contact;
 import domain.model.Person;
+import domain.model.Test;
 
 import java.util.List;
 
@@ -49,19 +47,32 @@ public class ContactTracingService {
     private ContactDB contactDB = new ContactDBSQL();
 
     public List<Contact> getContacts() {
-        return getContactDb().getAll();
+        return getContactDB().getAllAdmin();
     }
 
-    private ContactDB getContactDb() {
+    public List<Contact> getContactsUser(String userid) {
+        return getContactDB().getAllContactsFromUser(userid);
+    }
+
+    private ContactDB getContactDB() {
         return contactDB;
     }
 
     public void addContact(Contact contact) {
-        getContactDb().add(contact);
+        getContactDB().add(contact);
     }
 
     public void deleteContact(int id) {
-        getContactDb().delete(id);
+        getContactDB().delete(id);
     }
+
+
+//----------------------------------------------------------------------------------------------------------------------------//
+
+    private TestDB testDB = new TestDBSQL();
+
+    private TestDB getTestDB() {return testDB;}
+
+    public void addTest(Test test) {getTestDB().add(test);}
 
 }

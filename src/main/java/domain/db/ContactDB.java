@@ -8,7 +8,9 @@ public interface ContactDB {
 
     void add(Contact contact);
 
-    List<Contact> getAll();
+    List<Contact> getAllAdmin();
+
+    List<Contact> getAllContactsFromUser(String userid);
 
     void delete(int contactId);
 }

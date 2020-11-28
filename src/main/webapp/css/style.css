@@ -38,7 +38,7 @@ nav ul li {
     font-weight: bold;
     padding: 10px;
     width: 100%;
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 nav ul li a {
@@ -177,6 +177,7 @@ input {
         width: 33%;
         margin: auto;
         border: none;
+        height: 3em;
     }
 
     nav ul li:first-child {
@@ -217,5 +218,10 @@ input {
         vertical-align: middle;
     }
 
+}
 
+@media screen and (min-width: 811px) {
+    nav ul li {
+        height: 2em;
+    }
 }

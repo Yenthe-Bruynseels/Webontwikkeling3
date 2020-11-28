@@ -3,6 +3,7 @@ package ui.controller;
 import domain.db.DbException;
 import domain.model.Contact;
 import domain.model.DomainException;
+import domain.model.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ public class AddContact extends RequestHandler {
         setTimestamp(contact, request, errors);
         setPhonenumber(contact, request, errors);
         setEmail(contact, request, errors);
+        setUserID(contact, request, errors);
 
         if (errors.size() == 0) {
             try {
@@ -45,14 +47,23 @@ public class AddContact extends RequestHandler {
         //return "Controller?command=Contacts";
     }
 
+
     /*private void clearPreviousValues(HttpServletRequest request) {
-        request.removeAttr ibute("phonenumberPreviousValue");
+        request.removeAttribute("phonenumberPreviousValue");
         request.removeAttribute("prevHour");
         request.removeAttribute("prevDate");
         request.removeAttribute("emailPreviousValue");
         request.removeAttribute("firstNamePreviousValue");
         request.removeAttribute("lastNamePreviousValue");
     }*/
+    private void setUserID(Contact contact, HttpServletRequest request, ArrayList<String> errors) {
+        String userid = request.getParameter("userid");
+        try {
+            contact.setUserid(userid);
+        } catch (DomainException exc) {
+            errors.add(exc.getMessage());
+        }
+    }
 
     private void setPhonenumber(Contact contact, HttpServletRequest request, ArrayList<String> errors) {
         String phonenumber = request.getParameter("phonenumber");

@@ -18,11 +18,17 @@
         <nav>
             <ul>
                 <li id="actual"><a href="Controller">Home</a></li>
-                <li><a href="Controller?command=Overview">Users</a></li>
-                <%--<c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=PositiveTestPage">Users</a></li>
-                </c:if>--%>
-                <li><a href="Controller?command=Contacts">Contacts</a></li>
+                <c:if test="${user.role == 'ADMIN'}">
+                    <li><a href="Controller?command=Overview">Users</a></li>
+                </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                    <li><a href="Controller?command=Contacts">Contacts</a></li>
+                </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
+                </c:if>
                 <li><a href="Controller?command=Register">Register</a></li>
             </ul>
         </nav>

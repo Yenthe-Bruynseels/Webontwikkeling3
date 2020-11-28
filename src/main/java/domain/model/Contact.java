@@ -11,13 +11,15 @@ public class Contact {
     private String phonenumber;
     private String email;
     private int id;
+    private String userid;
 
-    public Contact(String firstName, String lastName, Timestamp timestamp, String phonenumber, String email) {
+    public Contact(String firstName, String lastName, Timestamp timestamp, String phonenumber, String email, String userid) {
         setFirstName(firstName);
         setLastName(lastName);
         setTimestamp(timestamp);
         setPhonenumber(phonenumber);
         setEmail(email);
+        setUserid(userid);
     }
 
     public Contact() {
@@ -60,7 +62,7 @@ public class Contact {
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        if (timestamp == null) throw new DomainException("Date cn't be null");
+        if (timestamp == null) throw new DomainException("Date can't be null");
         this.timestamp = timestamp;
     }
 
@@ -94,4 +96,11 @@ public class Contact {
         }
         this.email = email;
     }
+
+    public void setUserid(String userid) {
+        userid = userid.trim();
+        if (userid.isEmpty()) throw new DomainException("You have to log in first."); //userid leeg betekent dat de gebruiker niet ingelogd is, aangezien deze uit de user in de request, meer bepaald de session, gehaald wordt. Eens authorizatie op punt staat, kan deze error niet meer tegengekomen worden.
+        this.userid = userid;
+    }
+    public String getUserid(){return this.userid;}
 }
