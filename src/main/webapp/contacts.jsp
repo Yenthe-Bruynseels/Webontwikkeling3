@@ -24,7 +24,11 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li  id="actual"><a href="Controller?command=Contacts">Contacts</a></li>
+                    <li id="actual"><a href="Controller?command=Contacts">Contacts</a></li>
+                </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li>
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
@@ -47,11 +51,22 @@
             </div>
         </c:if>
 
+        <c:if test="${user.role == 'ADMIN'}">
+            <form novalidate="novalidate" method="post" action="Controller?command=AllContacts">
+                <!-- novalidate in order to be able to run tests correctly -->
+                <input type="submit" formaction="Controller?command=AllContacts" value="See all contacts"/>
+                <input type="submit" formaction="Controller?command=Contacts" value="See own contacts"/>
+            </form>
+        </c:if>
+
         <table>
             <tr>
                 <th>Date</th>
                 <th>Hour</th>
                 <th>Name</th>
+                <c:if test="${adminAllContacts == true}">
+                    <th>Username</th> <%--This is to show who's contact it is--%>
+                </c:if>
             </tr>
 
             <c:forEach var="contact" items="${contacts}">
@@ -59,8 +74,11 @@
                     <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
                     <td><fmt:formatDate pattern="HH:mm:ss" value="${contact.timestamp}"/></td>
                     <td><c:out value="${contact.firstName} ${contact.lastName}"/></td>
-                    <c:if test="${sessionScope.get('user').userid == 'admin'}">
-                            <td><a href="Controller?command=DeleteContact&id=${contact.id}">Delete</a></td>
+                    <c:if test="${adminAllContacts == true}">
+                        <td><c:out value="${contact.userid}"/></td>
+                    </c:if>
+                    <c:if test="${user.role == 'ADMIN'}">
+                        <td><a href="Controller?command=DeleteContact&id=${contact.id}">Delete</a></td>
                     </c:if>
                 </tr>
             </c:forEach>
@@ -70,17 +88,18 @@
         <form novalidate="novalidate" method="post" action="Controller?command=AddContact">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                               required value="<c:out value="${firstNamePreviousValue}"/>"/></p>
+                                                               required
+                                                               value="<c:out value="${firstNamePreviousValue}"/>"/></p>
             <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                             required value="<c:out value="${lastNamePreviousValue}"/>" /></p>
-            <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"/></p>
-            <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required value="${prevHour}"/></p>
+                                                             required
+                                                             value="<c:out value="${lastNamePreviousValue}"/>"/></p>
+            <p><label for="date">Date</label><input id="date" type="date" name="date" required value="<c:out value="${prevDate}"/>"/></p>
+            <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required value="<c:out value="${prevHour}"/>"/></p>
             <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required
                                                                    type="tel" placeholder="+32"
-                                                                   value="${phonenumberPreviousValue}"/></p>
+                                                                   value="<c:out value="${phonenumberPreviousValue}"/>"/></p>
             <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                      value="${emailPreviousValue}"/></p>
-            <input type="hidden" id="userid" name="userid" value="${user.userid}">
+                                                      value="<c:out value="${emailPreviousValue}"/>"/></p>
             <p><input type="submit" id="addContact" value="Add Contact"></p>
 
         </form>

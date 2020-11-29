@@ -41,13 +41,17 @@ public class ContactTracingService {
         return getPersonDb().getPersonIfAuthenticated(userid, password);
     }
 
+    public List<Person> allUsersWithManyContacts() {
+        return getPersonDb().getusersWithManyContacts();
+    }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------//
 
     private ContactDB contactDB = new ContactDBSQL();
 
-    public List<Contact> getContacts() {
-        return getContactDB().getAllAdmin();
+    public List<Contact> getAllContacts() {
+        return getContactDB().getAllContacts();
     }
 
     public List<Contact> getContactsUser(String userid) {
@@ -66,6 +70,10 @@ public class ContactTracingService {
         getContactDB().delete(id);
     }
 
+    public List<Contact> getAllContactsSincePositiveTest(String userid) {
+        return getContactDB().getAllContactsSinceLatestPositiveTest(userid);
+    }
+
 
 //----------------------------------------------------------------------------------------------------------------------------//
 
@@ -74,5 +82,7 @@ public class ContactTracingService {
     private TestDB getTestDB() {return testDB;}
 
     public void addTest(Test test) {getTestDB().add(test);}
+
+    public List<Test> getAllTests() {return getTestDB().allTests();}
 
 }

@@ -4,6 +4,9 @@ import domain.db.DbException;
 import domain.model.Contact;
 import domain.model.DomainException;
 import domain.model.Person;
+import domain.model.Role;
+import ui.authorisation.NotAuthorizedException;
+import ui.authorisation.Utility;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +20,12 @@ import java.util.ArrayList;
 
 public class AddContact extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws NotAuthorizedException,ServletException, IOException {
+        Role[] roles = {Role.ADMIN, Role.CUSTOMER};
+        Utility.checkRole(request, roles);
+
         ArrayList<String> errors = new ArrayList<>();
+
 
         Contact contact = new Contact();
         setFirstName(contact, request, errors);
@@ -57,7 +64,8 @@ public class AddContact extends RequestHandler {
         request.removeAttribute("lastNamePreviousValue");
     }*/
     private void setUserID(Contact contact, HttpServletRequest request, ArrayList<String> errors) {
-        String userid = request.getParameter("userid");
+        Person user = (Person) request.getSession().getAttribute("user");
+        String userid = user.getUserid();
         try {
             contact.setUserid(userid);
         } catch (DomainException exc) {

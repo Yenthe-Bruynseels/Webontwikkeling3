@@ -27,4 +27,6 @@ public interface PersonDB {
     Person getPersonIfAuthenticated(String personId, String password);
 
     void delete(String personId);
+
+    List<Person> getusersWithManyContacts();
 }

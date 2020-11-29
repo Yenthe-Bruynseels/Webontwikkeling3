@@ -14,6 +14,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private Role role;
+    private int aantalContacten;
 
     public Person(String userid, String email, String password, String firstName, String lastName) {
         setUserid(userid);
@@ -144,6 +145,14 @@ public class Person {
 
     @Override
     public String toString() {
-        return getFirstName() + " " + getLastName() + ": " + getUserid() + ", " + getEmail() + ", " + role;
+        return getFirstName() + " " + getLastName() + ": " + getUserid() + ", " + getEmail();
+    }
+
+    public int getAantalContacten() {
+        return aantalContacten;
+    }
+
+    public void setAantalContacten(int aantalContacten) {
+        this.aantalContacten = aantalContacten;
     }
 }

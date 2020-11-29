@@ -30,7 +30,7 @@ CREATE TABLE web3_project_r0748609.contact ( -- replace r123456 with your studen
                                                lastname character varying(50) NOT NULL,
                                                email character varying(64) NOT NULL,
                                                phonenumber character varying(15) NOT NULL,
-                                               date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                                               contactdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                                                CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user"(userid)
 );
 
@@ -43,9 +43,9 @@ GRANT ALL ON SEQUENCE web3_project_r0748609.contact_id_seq TO local_r0748609;
 
 CREATE TABLE web3_project_r0748609.positivetest (
                                                 user_id character varying(50) NOT NULL,
-                                                date date NOT NULL,
+                                                testdate date NOT NULL,
                                                 CONSTRAINT fk_positivetest FOREIGN KEY (user_id) REFERENCES "user"(userid),
-                                                CONSTRAINT pk_positivetest PRIMARY KEY(user_id,date)
+                                                CONSTRAINT pk_positivetest PRIMARY KEY(user_id,testdate)
 
 );
 

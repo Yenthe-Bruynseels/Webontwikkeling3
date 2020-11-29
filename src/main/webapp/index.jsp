@@ -27,7 +27,11 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
+                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li>
+                </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                    <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
                 </c:if>
                 <li><a href="Controller?command=Register">Register</a></li>
             </ul>
@@ -35,7 +39,13 @@
         <h2>Home</h2>
 
     </header>
-    <main><p>Welkom bij Café Campus Telenet! Corona gooit in het dagelijkse leven telkens roet in het eten, maar
+    <main>
+
+        <c:if test="${notAuthorized!=null}">
+            <p class="alert-danger">${notAuthorized}</p>
+        </c:if>
+
+        <p>Welkom bij Café Campus Telenet! Corona gooit in het dagelijkse leven telkens roet in het eten, maar
         gelukkig zijn wij een café en serveren wij geen eten. Bijgevolg zal alles even goed blijven smaken, echter
         kunnen wij deze pandemie niet negeren, waardoor ook wij genoodzaakt zijn enkele maatregelen te treffen. Eén
         hiervan ziet u op deze website; u dient zich te registreren bij elk bezoek. Op deze manier kunnen wij bijhouden

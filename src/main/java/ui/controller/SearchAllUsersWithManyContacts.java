@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class DeleteContact extends RequestHandler {
+public class SearchAllUsersWithManyContacts extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN};
         Utility.checkRole(request, roles);
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        cts.deleteContact(id);
-        response.sendRedirect("Controller?command=Contacts");
-        //request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
-        //return "Controller?command=Contacts";
+        request.setAttribute("users", cts.allUsersWithManyContacts());
+        request.getRequestDispatcher("search.jsp").forward(request,response);
     }
 }

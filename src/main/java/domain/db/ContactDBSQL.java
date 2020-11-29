@@ -2,6 +2,7 @@ package domain.db;
 
 import domain.model.Contact;
 import domain.model.Person;
+import ui.controller.Contacts;
 import util.DbConnectionService;
 
 import java.sql.*;
@@ -23,7 +24,7 @@ public class ContactDBSQL implements ContactDB {
         if (contact == null) {
             throw new DbException("Nothing to add.");
         }
-        String sql = String.format("INSERT INTO %s.contact ( firstname, lastname, email, phonenumber, date, user_id) VALUES (?, ?, ?, ?, ?, ?)", this.schema);
+        String sql = String.format("INSERT INTO %s.contact ( firstname, lastname, email, phonenumber, contactdate, user_id) VALUES (?, ?, ?, ?, ?, ?)", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
@@ -32,7 +33,7 @@ public class ContactDBSQL implements ContactDB {
             statementSQL.setString(3, contact.getEmail());
             statementSQL.setString(4, contact.getPhonenumber());
             statementSQL.setTimestamp(5, contact.getTimestamp());
-            statementSQL.setString(6,contact.getUserid());
+            statementSQL.setString(6, contact.getUserid());
             statementSQL.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -40,9 +41,9 @@ public class ContactDBSQL implements ContactDB {
     }
 
     @Override
-    public List<Contact> getAllAdmin() {
+    public List<Contact> getAllContacts() {
         List<Contact> contacts = new ArrayList<Contact>();
-        String sql = String.format("SELECT * FROM %s.contact ORDER BY date", this.schema);
+        String sql = String.format("SELECT * FROM %s.contact ORDER BY contactdate ", this.schema);
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
@@ -51,9 +52,9 @@ public class ContactDBSQL implements ContactDB {
                 String lastName = result.getString("lastname");
                 String email = result.getString("email");
                 String phonenumber = result.getString("phonenumber");
-                Timestamp date = result.getTimestamp("date");
+                Timestamp date = result.getTimestamp("contactdate");
                 int id = result.getInt("id");
-                String userid = result.getString("person_id");
+                String userid = result.getString("user_id");
                 Contact contact = new Contact(firstName, lastName, date, phonenumber, email, userid);
                 contact.setId(id);
                 contacts.add(contact);
@@ -67,7 +68,7 @@ public class ContactDBSQL implements ContactDB {
     @Override
     public List<Contact> getAllContactsFromUser(String userid) {
         List<Contact> contacts = new ArrayList<Contact>();
-        String sql = String.format("SELECT * FROM %s.contact WHERE user_id = '%s' ORDER BY date ", this.schema, userid);
+        String sql = String.format("SELECT * FROM %s.contact WHERE user_id = '%s' ORDER BY contactdate ", this.schema, userid);
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
@@ -76,7 +77,7 @@ public class ContactDBSQL implements ContactDB {
                 String lastName = result.getString("lastname");
                 String email = result.getString("email");
                 String phonenumber = result.getString("phonenumber");
-                Timestamp date = result.getTimestamp("date");
+                Timestamp date = result.getTimestamp("contactdate");
                 int id = result.getInt("id");
                 Contact contact = new Contact(firstName, lastName, date, phonenumber, email, userid);
                 contact.setId(id);
@@ -95,9 +96,37 @@ public class ContactDBSQL implements ContactDB {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             statementSql.setInt(1, contactID);
             statementSql.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DbException(e.getMessage(), e);
         }
 
     }
+
+    @Override
+    public List<Contact> getAllContactsSinceLatestPositiveTest(String userid) {
+        List<Contact> contacts = new ArrayList<Contact>();
+        String sql = String.format("SELECT co.* FROM %s.user as u inner join %s.positivetest as pt on u.userid = pt.user_id inner join %s.contact as co on u.userid = co.user_id WHERE u.userid = ? and DATE(co.contactdate) >= pt.testdate and pt.testdate = (SELECT max(pt.testdate) FROM %s.user as u inner join %s.positivetest as pt on u.userid = pt.user_id WHERE u.userid = ?)", this.schema, this.schema, this.schema, this.schema, this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, userid);
+            statementSql.setString(2, userid);
+            ResultSet result = statementSql.executeQuery();
+
+            while (result.next()) {
+                String firstName = result.getString("firstname");
+                String lastName = result.getString("lastname");
+                String phonenumber = result.getString("phonenumber");
+                String email = result.getString("email");
+                Timestamp date = result.getTimestamp("contactdate");
+
+                Contact contact = new Contact(firstName, lastName, date, phonenumber, email, userid);
+                contacts.add(contact);
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage(), e);
+        }
+        return contacts;
+    }
+
 }

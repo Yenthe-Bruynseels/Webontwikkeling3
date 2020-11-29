@@ -2,18 +2,26 @@ package ui.controller;
 
 import domain.db.DbException;
 import domain.model.DomainException;
+import domain.model.Person;
+import domain.model.Role;
 import domain.model.Test;
+import ui.authorisation.Utility;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RegisterPositiveTest extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Role[] roles = {Role.ADMIN, Role.CUSTOMER};
+        Utility.checkRole(request, roles);
+
+
         ArrayList<String> errors = new ArrayList<>();
 
         Test test = new Test();
@@ -36,8 +44,12 @@ public class RegisterPositiveTest extends RequestHandler {
         }
     }
 
+
+
+
     private void setUserid(Test test, HttpServletRequest request, ArrayList<String> errors) {
-        String userid = request.getParameter("userid");
+        Person user = (Person) request.getSession().getAttribute("user");
+        String userid = user.getUserid();
         try {
             test.setUserid(userid);
         } catch (DomainException exc) {

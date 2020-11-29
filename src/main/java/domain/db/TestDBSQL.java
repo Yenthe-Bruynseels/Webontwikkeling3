@@ -1,18 +1,19 @@
 package domain.db;
 
+import domain.model.Contact;
 import domain.model.DomainException;
 import domain.model.Test;
 import util.DbConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestDBSQL implements TestDB {
     private Connection connection;
     private String schema;
 
-    public TestDBSQL(){
+    public TestDBSQL() {
         this.connection = DbConnectionService.getDbConnection();
         this.schema = DbConnectionService.getSchema();
         System.out.println(this.schema);
@@ -21,7 +22,7 @@ public class TestDBSQL implements TestDB {
     @Override
     public void add(Test test) {
         if (test == null) throw new DbException("Nothing to add");
-        String sql = String.format("INSERT INTO %s.positivetest (user_id, date) VALUES (?, ?)", this.schema);
+        String sql = String.format("INSERT INTO %s.positivetest (user_id, testdate) VALUES (?, ?)", this.schema);
 
         try {
             PreparedStatement statementSQL = connection.prepareStatement(sql);
@@ -29,9 +30,27 @@ public class TestDBSQL implements TestDB {
             statementSQL.setDate(2, test.getDate());
             statementSQL.execute();
         } catch (SQLException e) {
-            throw new DbException(e);
+            throw new DbException("You already registered a test at this date.");
         }
     }
 
+    @Override
+    public List<Test> allTests() {
+        List<Test> tests = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s.positivetest ORDER BY testdate ", this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            ResultSet result = statementSql.executeQuery();
+            while (result.next()) {
+                String userid = result.getString("user_id");
+                Date date = result.getDate("testdate");
+                Test test = new Test(userid, date);
+                tests.add(test);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return tests;
+    }
 
 }

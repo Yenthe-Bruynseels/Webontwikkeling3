@@ -51,7 +51,9 @@ public class PersonDBSQL implements PersonDB {
                 String lastname = result.getString("lastname");
                 String email = result.getString("email");
                 String password = result.getString("password");
+                Role role = Role.valueOf(result.getString("role").toUpperCase());
                 Person person = new Person(userid, email, password, firstname, lastname);
+                person.setRole(role);
                 people.add(person);
             }
         } catch (SQLException e) {
@@ -102,6 +104,31 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
+    public List<Person> getusersWithManyContacts() {
+        List<Person> people = new ArrayList<>();
+        String sql = String.format("SELECT u.userid, u.firstname, u.lastname, u.email, u.password, u.role, count(*) FROM %s.contact as co inner join %s.user as u on u.userid = co.user_id GROUP BY u.userid HAVING count(*) >= 25", this.schema, this.schema);
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            ResultSet result = statementSql.executeQuery();
+            while (result.next()) {
+                String userid = result.getString("userid");
+                String firstname = result.getString("firstname");
+                String lastname = result.getString("lastname");
+                String email = result.getString("email");
+                String password = result.getString("password");
+                int aantal = result.getInt("count");
+                Person person = new Person(userid, email, password, firstname, lastname);
+                person.setAantalContacten(aantal);
+                people.add(person);
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return people;
+    }
+
+        @Override
     public Person getPersonIfAuthenticated(String personId, String password) {
         Person current = get(personId);
         if (current != null && current.isCorrectPassword(password)) {
@@ -109,4 +136,6 @@ public class PersonDBSQL implements PersonDB {
         }
         return null;
     }
+
+
 }

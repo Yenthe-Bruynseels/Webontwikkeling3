@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class AddUser extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         ArrayList<String> errors = new ArrayList<String>();
 
         Person person = new Person();
@@ -35,7 +36,7 @@ public class AddUser extends RequestHandler {
             //return "register.jsp";
         } else {
             cts.addPerson(person);
-            response.sendRedirect("Controller?command=Overview");
+            response.sendRedirect("Controller?command=Home");
             //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
             //return "Controller?command=Overview";
         }

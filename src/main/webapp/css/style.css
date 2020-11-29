@@ -33,7 +33,7 @@ nav ul {
 }
 
 nav ul li {
-    height: 2em;
+    height: auto;
     font-size: 150%;
     font-weight: bold;
     padding: 10px;
@@ -150,8 +150,6 @@ input[type="text"], input[type="email"], textarea {
 input {
     height: 25px;
 }
-
-
 /* desktop */
 @media screen and (min-width: 650px) {
     div#container {
@@ -220,8 +218,3 @@ input {
 
 }
 
-@media screen and (min-width: 811px) {
-    nav ul li {
-        height: 2em;
-    }
-}

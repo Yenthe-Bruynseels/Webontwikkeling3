@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.service.ContactTracingService;
+import ui.authorisation.NotAuthorizedException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +31,9 @@ public class Controller extends HttpServlet {
             try {
                 RequestHandler handler = handlerFactory.getHandler(command,cts);
                 handler.handleRequest(request, response);
-            } catch (Exception exc) {
-                request.setAttribute("error", exc.getMessage());
-                //destination = "error.jsp";
-                request.getRequestDispatcher("error.jsp").forward(request,response);
+            } catch (NotAuthorizedException e) {
+                request.setAttribute("notAuthorized", "You have insufficient rights to have a look at the requested page.");
+                handlerFactory.getHandler("Home", cts).handleRequest(request,response);
             }
         }
         else {

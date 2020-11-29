@@ -23,6 +23,10 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li>
+                </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
                 </c:if>
                 <li><a href="Controller?command=Register">Register</a></li>
@@ -46,9 +50,10 @@
                     <td><c:out value="${user.email}"/></td>
                     <td><c:out value="${user.firstName}"/></td>
                     <td><c:out value="${user.lastName}"/></td>
-                    <c:if test="${sessionScope.get('user').userid == 'admin'}">
-                        <c:if test="${user.userid != 'admin'}">
-                            <td><a href="Controller?command=Delete&userid=<c:out value="${user.userid}"/>">Delete</a></td>
+                    <c:if test="${sessionScope.get('user').role == 'ADMIN'}">
+                        <c:if test="${user.role != 'ADMIN'}">
+                            <td><a href="Controller?command=Delete&userid=<c:out value="${user.userid}"/>">Delete</a>
+                            </td>
                         </c:if>
                     </c:if>
                 </tr>

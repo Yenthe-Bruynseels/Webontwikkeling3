@@ -19,7 +19,7 @@ public class LogIn extends RequestHandler {
 
         if (user == null) {
             request.setAttribute("error", "No valid username/password");
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            request.getRequestDispatcher("Controller?command=Home").forward(request,response);
         } else {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("Controller?command=Home");

@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>Register Test</title>
+    <title>Positive Test</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -23,6 +23,9 @@
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li><a href="Controller?command=Contacts">Contacts</a></li>
                 </c:if>
+
+                <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
+                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li> </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li id="actual"><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
@@ -49,10 +52,27 @@
         <form novalidate="novalidate" method="post" action="Controller?command=RegisterPositiveTest">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"/></p>
-            <input type="hidden" id="userid" name="userid" value="${user.userid}">
             <p><input type="submit" id="RegisterPositiveTest" value="Register Test"></p>
 
         </form>
+
+
+        <c:if test="${user.role == 'ADMIN'}">
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Date</th>
+                </tr>
+
+                <c:forEach var="test" items="${tests}">
+                    <tr>
+                        <td><c:out value="${test.userid}"/></td>
+                        <td><c:out value="${test.date}"/></td>
+                    </tr>
+                </c:forEach>
+                <caption>Test Overview</caption>
+            </table>
+        </c:if>
 
 
     </main>
