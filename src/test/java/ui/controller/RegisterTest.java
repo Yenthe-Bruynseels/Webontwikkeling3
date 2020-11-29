@@ -35,7 +35,9 @@ public class RegisterTest {
         submitForm(useridRandom, "Jan", "Janssens", "jan.janssens@hotmail.com", "1234");
 
         String title = driver.getTitle();
-        assertEquals("Overview", title);
+        assertEquals("Home", title);
+
+        submitLogInForm("admin","t");
 
         driver.get(path + "?command=Overview");
 
@@ -209,6 +211,14 @@ public class RegisterTest {
         fillOutField("password", password);
 
         WebElement button = driver.findElement(By.id("signUp"));
+        button.click();
+    }
+
+    private void submitLogInForm(String userid, String password) {
+        fillOutField("userid", userid);
+        fillOutField("password", password);
+
+        WebElement button = driver.findElement(By.id("logIn"));
         button.click();
     }
 

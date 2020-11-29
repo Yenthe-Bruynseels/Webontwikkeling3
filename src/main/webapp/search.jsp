@@ -40,7 +40,7 @@
     <main>
 
         <c:if test="${not empty contacts}">
-            <h2>
+            <h2 id="SearchContactsToWarn">
                 Contact the following people
             </h2>
         </c:if>
@@ -74,17 +74,17 @@
         </table>
     </c:when>
     <c:otherwise>
-        <h2>Goed gedaan, er moeten geen mensen gecontacteerd worden.</h2>
+        <h2 id="SearchContactsToWarn0">Goed gedaan, er moeten geen mensen gecontacteerd worden.</h2>
     </c:otherwise>
 </c:choose>
 
         <c:if test="${not empty users}">
-        <h2>
-            The following people have 25 or more contacts.
+        <h2 id="SearchMany">
+            The following people have 25 or more contacts
         </h2>
 
 
-            <table>
+            <table id="ManyContactsTable">
                 <tr>
                     <th>Username</th>
                     <th>Name</th>

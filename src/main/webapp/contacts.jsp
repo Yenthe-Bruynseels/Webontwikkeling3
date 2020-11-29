@@ -54,7 +54,7 @@
         <c:if test="${user.role == 'ADMIN'}">
             <form novalidate="novalidate" method="post" action="Controller?command=AllContacts">
                 <!-- novalidate in order to be able to run tests correctly -->
-                <input type="submit" formaction="Controller?command=AllContacts" value="See all contacts"/>
+                <input id="AllContactsButton" type="submit" formaction="Controller?command=AllContacts" value="See all contacts"/>
                 <input type="submit" formaction="Controller?command=Contacts" value="See own contacts"/>
             </form>
         </c:if>

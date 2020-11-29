@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DeleteContactTest {
@@ -75,35 +76,13 @@ public class DeleteContactTest {
 
         assertTrue(deleteButtons2.size() == deleteButtons1.size()); // shows the number of delete buttons is the same as before the extra contact has been implemented
         assertTrue(deleteButtons2.size() == 0); // shows that the number of delmete buttons is 0
-
-        driver.get(path);
-        driver.findElement(By.id("logOut")).click();
-
-        submitLogInForm("yenthe", "yeet");
-        driver.findElement(By.id("logOut")); //if user isn't logged in, this line will make the test crash and thus fail.
-        driver.get(path + "?command=Contacts");
-        List<WebElement> deleteButtons3 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
-        System.out.println(deleteButtons3.size());
-        submitAddContactForm("Thibault", "Magnini", "10042020", "0809PM", "+32492606838", "thibie@test.be");
-        List<WebElement> deleteButtons4 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
-        System.out.println(deleteButtons4.size());
-
-        assertTrue(deleteButtons4.size() == deleteButtons3.size()); // shows the number of delete buttons is the same as before the extra contact has been implemented
-        assertTrue(deleteButtons4.size() == 0); // shows that the number of delmete buttons is 0
-
     }
 
     @Test
-    public void test_NotLoggedInUserDoesNotSeeDeleteButtons() {
+    public void test_NotLoggedInUserDoesNotSeeContactOverview() {
         driver.get(path + "?command=Contacts");
-        List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
-        System.out.println(deleteButtons1.size());
-        submitAddContactForm("Yenthe8", "Bruynseels", "09042020", "0808PM", "+32492606837", "yenthe@test.be");
-        List<WebElement> deleteButtons2 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
-        System.out.println(deleteButtons2.size());
+        assertEquals("Home", driver.getTitle());
 
-        assertTrue(deleteButtons2.size() == deleteButtons1.size()); // shows the number of delete buttons is the same as before the extra contact has been implemented
-        assertTrue(deleteButtons2.size() == 0); // shows that the number of delmete buttons is 0
     }
 
 
