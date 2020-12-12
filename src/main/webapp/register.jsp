@@ -25,7 +25,8 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li> </c:if>
+                    <li><a href="Controller?command=SearchContactsSinceLastPositiveTest">Search</a></li>
+                </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
@@ -49,24 +50,36 @@
             </div>
         </c:if>
 
-        <form novalidate="novalidate" method="post" action="Controller?command=AddUser">
+        <form novalidate="novalidate" method="post" action="Controller?command=AddUser" id="registerForm">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
-                                                          required value="<c:out value='${useridPreviousValue}'/>" /></p>
+                                                          required value="<c:out value='${useridPreviousValue}'/>"/></p>
             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                               required value="<c:out value='${firstNamePreviousValue}'/>"/></p>
+                                                               required
+                                                               value="<c:out value='${firstNamePreviousValue}'/>"/></p>
             <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                             required value="<c:out value='${lastNamePreviousValue}'/>"/></p>
-            <p><label for="email">Email</label><input type="email" id="email" name="email" required value="<c:out value='${emailPreviousValue}'/>"/></p>
+                                                             required
+                                                             value="<c:out value='${lastNamePreviousValue}'/>"/></p>
+            <p><label for="email">Email</label><input type="email" id="email" name="email" required
+                                                      pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"
+                                                      value="<c:out value='${emailPreviousValue}'/>"/></p>
             <p><label for="password">Password</label><input type="password" id="password" name="password"
-                                                            required value="<c:out value='${passwordPreviousValue}'/>"/></p>
+                                                            required value="<c:out value='${passwordPreviousValue}'/>"/>
+            </p>
             <p><input type="submit" id="signUp" value="Sign Up"></p>
-
         </form>
     </main>
     <footer>
         &copy; Webontwikkeling 3, UC Leuven-Limburg
     </footer>
 </div>
+<script src="scripts/formAuthentication.js">
+</script>
+<script>
+    window.addEventListener("load", Cisse, false);
+    function Cisse() {
+
+    }
+</script>
 </body>
 </html>

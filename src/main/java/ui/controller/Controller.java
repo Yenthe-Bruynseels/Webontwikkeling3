@@ -34,6 +34,9 @@ public class Controller extends HttpServlet {
             } catch (NotAuthorizedException e) {
                 request.setAttribute("notAuthorized", "You have insufficient rights to have a look at the requested page.");
                 handlerFactory.getHandler("Home", cts).handleRequest(request,response);
+            } catch (Exception e) {
+                request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("error.jsp").forward(request,response);
             }
         }
         else {

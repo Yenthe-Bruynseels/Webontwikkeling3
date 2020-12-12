@@ -1,5 +1,6 @@
 package ui.controller;
 
+import domain.db.DbException;
 import domain.model.DomainException;
 import domain.model.Person;
 
@@ -22,7 +23,21 @@ public class AddUser extends RequestHandler {
         setEmail(person, request, errors);
         setPassword(person, request, errors);
 
-        if (errors.size() > 0) {
+        if (errors.size() == 0) {
+            try {
+                cts.addPerson(person);
+                response.sendRedirect("Controller?command=Home");
+            } catch (DbException exc) {
+                errors.add(exc.getMessage());
+                request.setAttribute("errors", errors);
+                request.getRequestDispatcher("register.jsp").forward(request,response);
+            }
+        } else {
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+
+/*        if (errors.size() > 0) {
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("register.jsp").forward(request, response);
             //return "register.jsp";
@@ -39,7 +54,7 @@ public class AddUser extends RequestHandler {
             response.sendRedirect("Controller?command=Home");
             //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
             //return "Controller?command=Overview";
-        }
+        }*/
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {

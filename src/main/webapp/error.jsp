@@ -31,7 +31,9 @@
             <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                 <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
             </c:if>
-            <li><a href="Controller?command=Register">Register</a></li>
+            <c:if test="${user.role != 'ADMIN' && user.role != 'CUSTOMER'}">
+                <li><a href="Controller?command=Register">Register</a></li>
+            </c:if>
         </ul>
     </nav>
     <h2>Home</h2>
@@ -44,5 +46,6 @@
         <p>${error}</p>
     </div>
 </main>
+
 </body>
 </html>

@@ -18,6 +18,7 @@
         <nav>
             <ul>
                 <li id="actual"><a href="Controller">Home</a></li>
+                <%--<li id="actual" onclick="location.href = 'Controller'">pannenkoek</li>--%>
                 <c:if test="${user.role == 'ADMIN'}">
                     <li><a href="Controller?command=Overview">Users</a></li>
                 </c:if>
@@ -33,7 +34,9 @@
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
                 </c:if>
-                <li><a href="Controller?command=Register">Register</a></li>
+                <c:if test="${user.role != 'ADMIN' && user.role != 'CUSTOMER'}">
+                    <li><a href="Controller?command=Register">Register</a></li>
+                </c:if>
             </ul>
         </nav>
         <h2>Home</h2>
@@ -83,5 +86,6 @@
     </main>
     <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
+<script src="scripts/formAuthentication.js"></script>
 </body>
 </html>

@@ -30,7 +30,9 @@
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
                     <li id="actual"><a href="Controller?command=PositiveTest">Register Positive Test</a></li>
                 </c:if>
-                <li><a href="Controller?command=Register">Register</a></li>
+                <c:if test="${user.role != 'ADMIN' && user.role != 'CUSTOMER'}">
+                    <li><a href="Controller?command=Register">Register</a></li>
+                </c:if>
             </ul>
         </nav>
         <h2>
@@ -80,6 +82,7 @@
         &copy; Webontwikkeling 3, UC Leuven-Limburg
     </footer>
 </div>
+<script src="scripts/formAuthentication.js"></script>
 </body>
 </html>
 

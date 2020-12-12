@@ -34,7 +34,7 @@ public class PersonDBSQL implements PersonDB {
             statementSQL.setString(5, person.getPassword());
             statementSQL.execute();
         } catch (SQLException e) {
-            throw new DbException(e);
+            throw new DbException("Deze user bestaat al.");
         }
     }
 
