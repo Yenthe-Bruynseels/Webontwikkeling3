@@ -3,6 +3,8 @@ package ui.controller;
 import domain.db.DbException;
 import domain.model.DomainException;
 import domain.model.Person;
+import domain.model.Role;
+import ui.authorisation.Utility;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 public class AddUser extends RequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Role[] roles = {Role.ADMIN, Role.CUSTOMER};
+        Utility.checkRole(request, roles);
 
         ArrayList<String> errors = new ArrayList<String>();
 
@@ -36,25 +40,6 @@ public class AddUser extends RequestHandler {
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
-
-/*        if (errors.size() > 0) {
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            //return "register.jsp";
-        }
-
-        Person thePerson = cts.getPerson(request.getParameter("userid").trim().toLowerCase());
-        if (thePerson != null) {
-            errors.add("User already exists.");
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("register.jsp").forward(request,response);
-            //return "register.jsp";
-        } else {
-            cts.addPerson(person);
-            response.sendRedirect("Controller?command=Home");
-            //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
-            //return "Controller?command=Overview";
-        }*/
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {
