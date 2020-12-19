@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class PositiveTest extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
@@ -21,6 +21,7 @@ public class PositiveTest extends RequestHandler {
             request.setAttribute("tests", cts.getAllTests());
         }
 
-        request.getRequestDispatcher("positivetest.jsp").forward(request,response);
+        //request.getRequestDispatcher("positivetest.jsp").forward(request,response);
+        return "positivetest.jsp";
     }
 }

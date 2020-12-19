@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class AddContact extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws NotAuthorizedException,ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws NotAuthorizedException,ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
@@ -44,14 +44,9 @@ public class AddContact extends RequestHandler {
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("Controller?command=AllContactsUser").forward(request,response);
             }
         }
-        else {
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("Controller?command=AllContactsUser").forward(request,response);
-        }
-        //return "Controller?command=AllContactsUser";
+        return "Controller?command=AllContactsUser";
     }
 
 

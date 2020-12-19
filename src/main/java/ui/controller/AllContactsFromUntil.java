@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class AllContactsFromUntil extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN};
         Utility.checkRole(request, roles);
 
@@ -38,20 +38,18 @@ public class AllContactsFromUntil extends RequestHandler {
             Timestamp until = parseTimeStamp(untilDate, untilTime);
 
             if (from.equals(until) || from.after(until)) {
-                throw new Exception("'From' must be smaller than 'until'");
+                throw new Exception("'From' must be smaller than 'Until'");
             }
 
             request.setAttribute("contacts", cts.getAllContactsFromUntil(from, until));
-            request.getRequestDispatcher("contacts.jsp").forward(request, response);
         } catch (DateTimeException e) {
             errors.add("date or hour invalid");
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("contacts.jsp").forward(request, response);
         } catch (Exception e) {
             errors.add(e.getMessage());
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("contacts.jsp").forward(request, response);
         }
+        request.setAttribute("errors", errors);
+        //request.getRequestDispatcher("contacts.jsp").forward(request, response);
+        return "contacts.jsp";
     }
 
 

@@ -11,7 +11,7 @@ public abstract class RequestHandler {
 
     protected ContactTracingService cts;
 
-    public abstract void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    public abstract String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
     public void setModel(ContactTracingService cts) {
         this.cts = cts;

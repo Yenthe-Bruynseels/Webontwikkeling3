@@ -12,12 +12,12 @@ import java.io.IOException;
 
 public class Register extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Person user = (Person) request.getSession().getAttribute("user");
         if (user == null) {
 
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            //return "register.jsp";
+            //request.getRequestDispatcher("register.jsp").forward(request, response);
+            return "register.jsp";
         } else {
             throw new NotAuthorizedException("Alleen niet ingelogde gebruikers hebben toegang tot deze pagina");
         }

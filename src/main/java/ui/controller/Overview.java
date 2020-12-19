@@ -10,12 +10,12 @@ import java.io.IOException;
 
 public class Overview extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN};
         Utility.checkRole(request, roles);
 
         request.setAttribute("users", cts.getPersons());
-        request.getRequestDispatcher("personoverview.jsp").forward(request,response);
-        //return "personoverview.jsp";
+        //request.getRequestDispatcher("personoverview.jsp").forward(request,response);
+        return "personoverview.jsp";
     }
 }

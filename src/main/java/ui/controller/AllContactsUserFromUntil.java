@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class AllContactsUserFromUntil extends RequestHandler{
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
@@ -45,16 +45,14 @@ public class AllContactsUserFromUntil extends RequestHandler{
             }
 
             request.setAttribute("contacts", cts.getContactsUserFromUntil(user.getUserid(), from, until));
-            request.getRequestDispatcher("contacts.jsp").forward(request,response);
         } catch (DateTimeException e) {
             errors.add("date or hour invalid");
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("contacts.jsp").forward(request, response);
         } catch (Exception e) {
             errors.add(e.getMessage());
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("contacts.jsp").forward(request, response);
         }
+        request.setAttribute("errors", errors);
+        //request.getRequestDispatcher("contacts.jsp").forward(request, response);
+        return "contacts.jsp";
     }
 
     public Timestamp parseTimeStamp(String date, String time) {

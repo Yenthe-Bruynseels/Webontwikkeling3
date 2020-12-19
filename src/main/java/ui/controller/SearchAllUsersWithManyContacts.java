@@ -10,11 +10,12 @@ import java.io.IOException;
 
 public class SearchAllUsersWithManyContacts extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN};
         Utility.checkRole(request, roles);
 
         request.setAttribute("users", cts.allUsersWithManyContacts());
-        request.getRequestDispatcher("search.jsp").forward(request,response);
+        //request.getRequestDispatcher("search.jsp").forward(request,response);
+        return "search.jsp";
     }
 }

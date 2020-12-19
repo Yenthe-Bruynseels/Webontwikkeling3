@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class RegisterPositiveTest extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
@@ -34,14 +34,11 @@ public class RegisterPositiveTest extends RequestHandler {
                 response.sendRedirect("Controller?command=AllContactsUser");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
-                request.setAttribute("errors", errors);
-                request.getRequestDispatcher("positivetest.jsp").forward(request,response);
             }
         }
-        else {
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("positivetest.jsp").forward(request,response);
-        }
+        request.setAttribute("errors", errors);
+        return "Controller?command=PositiveTest";
+        //request.getRequestDispatcher("positivetest.jsp").forward(request,response);
     }
 
 

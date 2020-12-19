@@ -10,13 +10,13 @@ import java.io.IOException;
 
 public class LogOut extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
         request.getSession().invalidate();
         response.sendRedirect("Controller?command=Home");
         //request.getRequestDispatcher("index.jsp").forward(request, response);
-        //return "index.jsp";
+        return "index.jsp";
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class AddUser extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
@@ -33,13 +33,10 @@ public class AddUser extends RequestHandler {
                 response.sendRedirect("Controller?command=Home");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
-                request.setAttribute("errors", errors);
-                request.getRequestDispatcher("register.jsp").forward(request,response);
             }
-        } else {
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
+        request.setAttribute("errors", errors);
+        return "register.jsp";
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class LogIn extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Person currentUser = (Person) request.getSession().getAttribute("user");
         if (currentUser == null) {
 
@@ -23,12 +23,11 @@ public class LogIn extends RequestHandler {
 
             if (user == null) {
                 request.setAttribute("error", "No valid username/password");
-                request.getRequestDispatcher("Controller?command=Home").forward(request, response);
             } else {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Controller?command=Home");
             }
-            //return "index.jsp";
+            return "index.jsp";
         } else {
             throw new NotAuthorizedException("Alleen niet ingelogde gebruikers hebben toegang tot deze pagina");
         }

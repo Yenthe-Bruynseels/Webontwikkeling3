@@ -13,18 +13,19 @@ import java.io.IOException;
 
 public class SearchContactsSinceLastPositiveTest extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Role[] roles = {Role.ADMIN, Role.CUSTOMER};
         Utility.checkRole(request, roles);
 
         Person user = (Person) request.getSession().getAttribute("user");
         request.setAttribute("contacts", cts.getAllContactsSincePositiveTest(user.getUserid()));
         if (user.getRole().equals(Role.ADMIN)) {
-            request.getRequestDispatcher("Controller?command=SearchAllUsersWithManyContacts").forward(request,response);
+            //request.getRequestDispatcher("Controller?command=SearchAllUsersWithManyContacts").forward(request,response);
+            return "Controller?command=SearchAllUsersWithManyContacts";
         }
         else {
-            request.getRequestDispatcher("search.jsp").forward(request,response);
-
+            //request.getRequestDispatcher("search.jsp").forward(request,response);
+            return "search.jsp";
         }
     }
 }

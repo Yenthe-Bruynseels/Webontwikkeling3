@@ -24,26 +24,23 @@ public class Controller extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //String destination = "index.jsp";
+        String destination = "index.jsp";
         String command = request.getParameter("command");
 
         if (command != null) {
             try {
                 RequestHandler handler = handlerFactory.getHandler(command,cts);
-                handler.handleRequest(request, response);
+                destination = handler.handleRequest(request, response);
             } catch (NotAuthorizedException e) {
                 request.setAttribute("notAuthorized", "You have insufficient rights to have a look at the requested page.");
-                handlerFactory.getHandler("Home", cts).handleRequest(request,response);
             } catch (Exception e) {
                 request.setAttribute("error", e.getMessage());
-                request.getRequestDispatcher("error.jsp").forward(request,response);
             }
         }
-        else {
-            request.getRequestDispatcher("index.jsp").forward(request,response);
 
+        if (!response.isCommitted()) {
+            request.getRequestDispatcher(destination).forward(request,response);
         }
-        //request.getRequestDispatcher(destination).forward(request,response);
     }
 
 

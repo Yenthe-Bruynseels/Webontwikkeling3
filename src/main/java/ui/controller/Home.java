@@ -7,9 +7,8 @@ import java.io.IOException;
 
 public class Home extends RequestHandler {
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request,response);
-        //return "index.jsp";
+    public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return "index.jsp";
     }
 }
 
