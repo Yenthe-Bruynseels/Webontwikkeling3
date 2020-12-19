@@ -21,7 +21,7 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=Contacts">Contacts</a></li>
+                    <li><a href="Controller?command=AllContactsUser">Contacts</a></li>
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
@@ -39,7 +39,7 @@
         </h2>
 
     </header>
-    <main>
+    <main id="main">
         <c:if test="${not empty errors}">
             <div class="alert-danger">
                 <ul>
@@ -50,7 +50,7 @@
             </div>
         </c:if>
 
-        <form novalidate="novalidate" method="post" action="Controller?command=AddUser" id="registerForm">
+        <form novalidate="novalidate" method="post" action="Controller?command=AddUser" id="form">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="userid">Username</label><input type="text" id="userid" name="userid"
                                                           required value="<c:out value='${useridPreviousValue}'/>"/></p>
@@ -74,12 +74,6 @@
     </footer>
 </div>
 <script src="scripts/formAuthentication.js">
-</script>
-<script>
-    window.addEventListener("load", Cisse, false);
-    function Cisse() {
-
-    }
 </script>
 </body>
 </html>

@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+#error, .error {
+    color: #ff0a45;
+}
+
 body {
     font-family: arial, sans-serif;
     font-size: 90%;

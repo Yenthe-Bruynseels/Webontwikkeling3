@@ -16,6 +16,6 @@ public class AllContacts extends RequestHandler{
         Utility.checkRole(request, roles);
         request.setAttribute("adminAllContacts", true);
         request.setAttribute("contacts", cts.getAllContacts());
-        request.getRequestDispatcher("contacts.jsp").forward(request,response); //Geen redirect, aangezien deze contacts anders zijn dan die uit de handler Contacts
+        request.getRequestDispatcher("contacts.jsp").forward(request,response); //Geen redirect, aangezien deze contacts anders zijn dan die uit de handler AllContactsUser
     }
 }

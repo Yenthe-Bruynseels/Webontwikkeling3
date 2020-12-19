@@ -22,7 +22,7 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=Contacts">Contacts</a></li>
+                    <li><a href="Controller?command=AllContactsUser">Contacts</a></li>
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">

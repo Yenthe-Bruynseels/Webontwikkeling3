@@ -21,7 +21,7 @@ public class DeleteContactTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get(path); // We don't open our Contacts page with the setUp method because most of the tests require a user to log in. We don't log in our user in the setUp method because we need different users in different tests.
+        driver.get(path); // We don't open our AllContactsUser page with the setUp method because most of the tests require a user to log in. We don't log in our user in the setUp method because we need different users in different tests.
     }
 
     @After
@@ -34,7 +34,7 @@ public class DeleteContactTest {
     @Test
     public void test_AdminSeesDeleteButtons() {
         submitLogInForm("admin", "t");
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
         submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
@@ -51,7 +51,7 @@ public class DeleteContactTest {
     @Test
     public void test_AdminDeletesContact() {
         submitLogInForm("admin", "t");
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be"); // This is done, just to be sure that there will always be at least 1 contact in the database for if test would be run on it's own multiple times.
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']")); //puts all delete buttons in a list
         System.out.println(deleteButtons1.size());
@@ -67,7 +67,7 @@ public class DeleteContactTest {
         submitLogInForm("thibault", "z&g=/=okay");
         driver.findElement(By.id("logOut")); //if user isn't logged in, this line will make the test crash and thus fail.
 
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
         submitAddContactForm("Yenthe6", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be");
@@ -80,7 +80,7 @@ public class DeleteContactTest {
 
     @Test
     public void test_NotLoggedInUserDoesNotSeeContactOverview() {
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         assertEquals("Home", driver.getTitle());
 
     }

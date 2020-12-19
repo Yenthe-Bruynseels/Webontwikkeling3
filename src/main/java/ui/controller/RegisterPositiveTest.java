@@ -31,7 +31,7 @@ public class RegisterPositiveTest extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 cts.addTest(test);
-                response.sendRedirect("Controller?command=Contacts");
+                response.sendRedirect("Controller?command=AllContactsUser");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);

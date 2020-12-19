@@ -21,7 +21,7 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=Contacts">Contacts</a></li>
+                    <li><a href="Controller?command=AllContactsUser">Contacts</a></li>
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
@@ -51,7 +51,7 @@
             </div>
         </c:if>
 
-        <form novalidate="novalidate" method="post" action="Controller?command=RegisterPositiveTest">
+        <form novalidate="novalidate" method="post" action="Controller?command=RegisterPositiveTest" id="form">
             <!-- novalidate in order to be able to run tests correctly -->
             <p><label for="date">Date</label><input id="date" type="date" name="date" required value="${prevDate}"/></p>
             <p><input type="submit" id="RegisterPositiveTest" value="Register Test"></p>

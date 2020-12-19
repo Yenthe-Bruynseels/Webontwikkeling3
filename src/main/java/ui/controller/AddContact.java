@@ -39,19 +39,19 @@ public class AddContact extends RequestHandler {
             try {
                 cts.addContact(contact);
                 //clearPreviousValues(request);
-                //return "Controller?command=Contacts";
-                response.sendRedirect("Controller?command=Contacts");
+                //return "Controller?command=AllContactsUser";
+                response.sendRedirect("Controller?command=AllContactsUser");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+                request.getRequestDispatcher("Controller?command=AllContactsUser").forward(request,response);
             }
         }
         else {
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("Controller?command=Contacts").forward(request,response);
+            request.getRequestDispatcher("Controller?command=AllContactsUser").forward(request,response);
         }
-        //return "Controller?command=Contacts";
+        //return "Controller?command=AllContactsUser";
     }
 
 

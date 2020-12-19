@@ -25,6 +25,7 @@ function finalValidation(event) {
         event.preventDefault();
         hasErrors.focus();
     }
+
 }
 
 function checkField(event) {

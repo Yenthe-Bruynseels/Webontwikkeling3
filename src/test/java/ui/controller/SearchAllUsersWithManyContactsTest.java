@@ -63,7 +63,7 @@ public class SearchAllUsersWithManyContactsTest {
         driver.get(path);
         driver.findElement(By.id("logOut")).click();
         submitLogInForm("24contacts", "t");
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         submitAddContactForm("Yenthe", "Bruynseels", "09042022", "0808PM", "+32492606838", "yenthe@test.be");
         driver.get(path);
         driver.findElement(By.id("logOut")).click();
@@ -75,7 +75,7 @@ public class SearchAllUsersWithManyContactsTest {
         assertTrue(rows.size() + 1 == rows2.size()); //24Contacts now has 25 so shows in the list as well, thus 1 more tr tag in the table.
 
 
-        driver.get(path + "?command=Contacts");
+        driver.get(path + "?command=AllContactsUser");
         driver.findElement(By.id("AllContactsButton")).click();
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         deleteButtons1.get(deleteButtons1.size()-1).click();

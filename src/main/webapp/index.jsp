@@ -24,7 +24,7 @@
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
-                    <li><a href="Controller?command=Contacts">Contacts</a></li>
+                    <li><a href="Controller?command=AllContactsUser">Contacts</a></li>
                 </c:if>
 
                 <c:if test="${user.role == 'ADMIN' || user.role == 'CUSTOMER'}">
@@ -49,11 +49,13 @@
         </c:if>
 
         <p>Welkom bij Café Campus Telenet! Corona gooit in het dagelijkse leven telkens roet in het eten, maar
-        gelukkig zijn wij een café en serveren wij geen eten. Bijgevolg zal alles even goed blijven smaken, echter
-        kunnen wij deze pandemie niet negeren, waardoor ook wij genoodzaakt zijn enkele maatregelen te treffen. Eén
-        hiervan ziet u op deze website; u dient zich te registreren bij elk bezoek. Op deze manier kunnen wij bijhouden
-        wie er wanneer in het café geweest is en bijgevolg als er iemand van onze klanten positief test ook meteen de
-        juiste mensen verwittigen om zich te laten testen!</p>
+            gelukkig zijn wij een café en serveren wij geen eten. Bijgevolg zal alles even goed blijven smaken, echter
+            kunnen wij deze pandemie niet negeren, waardoor ook wij genoodzaakt zijn enkele maatregelen te treffen. Eén
+            hiervan ziet u op deze website; u dient zich te registreren bij elk bezoek. Op deze manier kunnen wij
+            bijhouden
+            wie er wanneer in het café geweest is en bijgevolg als er iemand van onze klanten positief test ook meteen
+            de
+            juiste mensen verwittigen om zich te laten testen!</p>
         <p>Samen krijgen we Corona klein!</p>
 
         <c:if test="${error != null}">
@@ -63,7 +65,7 @@
         </c:if>
         <c:choose>
             <c:when test="${user == null}">
-                <form novalidate="novalidate" method="post" action="Controller?command=LogIn">
+                <form novalidate="novalidate" method="post" action="Controller?command=LogIn" id="form">
                     <!-- novalidate in order to be able to run tests correctly -->
                     <p><label for="userid">Username</label>
                         <input type="text" id="userid" name="userid"
@@ -78,7 +80,7 @@
             <c:otherwise>
                 <%--<p> Welcome, ${user.firstName}</p>--%>
                 <p>Welcome, <c:out value="${user.firstName}"/></p>
-                <form novalidate="novalidate" method="post" action="Controller?command=LogOut">
+                <form novalidate="novalidate" method="post" action="Controller?command=LogOut" id="form">
                     <p><input type="submit" id="logOut" value="Log Out"></p>
                 </form>
             </c:otherwise>

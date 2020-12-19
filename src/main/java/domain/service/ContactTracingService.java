@@ -5,6 +5,8 @@ import domain.model.Contact;
 import domain.model.Person;
 import domain.model.Test;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ContactTracingService {
@@ -54,8 +56,16 @@ public class ContactTracingService {
         return getContactDB().getAllContacts();
     }
 
+    public List<Contact> getAllContactsFromUntil(Timestamp from, Timestamp until) {
+        return getContactDB().getAllContactsFromUntil(from, until);
+    }
+
     public List<Contact> getContactsUser(String userid) {
         return getContactDB().getAllContactsFromUser(userid);
+    }
+
+    public List<Contact> getContactsUserFromUntil(String userid, Timestamp from, Timestamp until) {
+        return getContactDB().getAllContactsFromUserFromUntil(userid, from, until);
     }
 
     private ContactDB getContactDB() {
