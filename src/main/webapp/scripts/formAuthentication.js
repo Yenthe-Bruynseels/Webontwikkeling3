@@ -55,6 +55,9 @@ function hasError(field) {
         if (field.type === "email") {
             return "This is not a valid email.";
         }
+        if (field.type === "tel") {
+            return "This is not a valid phonenumber"
+        }
     }
     return "Please complete the form correct";
 }

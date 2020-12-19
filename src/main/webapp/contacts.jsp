@@ -112,7 +112,6 @@
                         <td><c:out value="${contact.firstName} ${contact.lastName}"/></td>
                         <td><c:out value="${contact.email}"/></td>
                         <td><c:out value="${contact.phonenumber}"/></td>
-                        <td><c:out value="Geen idee hoe"/></td>
                         <c:if test="${user.role == 'ADMIN'}">
                             <td><a href="Controller?command=DeleteContact&id=${contact.id}">Delete</a></td>
                         </c:if>
@@ -134,12 +133,12 @@
                                                         value="<c:out value="${prevDate}"/>"/></p>
                 <p><label for="hour">Hour</label><input id="hour" type="time" name="hour" required
                                                         value="<c:out value="${prevHour}"/>"/></p>
-                <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required
+                <p><label for="phonenumber">Phone number</label><input id="phonenumber" name="phonenumber" required pattern="^\+324[0-9]{8}$"
                                                                        type="tel" placeholder="+32"
                                                                        value="<c:out value="${phonenumberPreviousValue}"/>"/>
                 </p>
-                <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                          value="<c:out value="${emailPreviousValue}"/>"/></p>
+                <p><label for="email">Email</label><input type="email" id="email" name="email" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"
+                                                          value="<c:out value="${emailPreviousValue}" />"/></p>
                 <p><input type="submit" id="addContact" value="Add Contact"></p>
 
             </form>
