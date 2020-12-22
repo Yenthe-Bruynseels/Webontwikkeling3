@@ -27,9 +27,9 @@ public class LogIn extends RequestHandler {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("Controller?command=Home");
             }
-            return "index.jsp";
+            return "Controller?command=Home";
         } else {
-            throw new NotAuthorizedException("Alleen niet ingelogde gebruikers hebben toegang tot deze pagina");
+            throw new NotAuthorizedException("Alleen niet ingelogde gebruikers kunnen zich inloggen.");
         }
     }
 }

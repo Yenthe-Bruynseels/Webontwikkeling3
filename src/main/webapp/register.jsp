@@ -61,7 +61,7 @@
                                                              required
                                                              value="<c:out value='${lastNamePreviousValue}'/>"/></p>
             <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                      pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"
+                                                      pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$"
                                                       value="<c:out value='${emailPreviousValue}'/>"/></p>
             <p><label for="password">Password</label><input type="password" id="password" name="password"
                                                             required value="<c:out value='${passwordPreviousValue}'/>"/>

@@ -38,26 +38,17 @@ public class AddContact extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 cts.addContact(contact);
-                //clearPreviousValues(request);
-                //return "Controller?command=AllContactsUser";
+                request.getSession().setAttribute("positive", "Uw contact is succesvol geregistreerd!");
                 response.sendRedirect("Controller?command=AllContactsUser");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
-                request.setAttribute("errors", errors);
             }
         }
+        request.setAttribute("errors", errors);
         return "Controller?command=AllContactsUser";
     }
 
 
-    /*private void clearPreviousValues(HttpServletRequest request) {
-        request.removeAttribute("phonenumberPreviousValue");
-        request.removeAttribute("prevHour");
-        request.removeAttribute("prevDate");
-        request.removeAttribute("emailPreviousValue");
-        request.removeAttribute("firstNamePreviousValue");
-        request.removeAttribute("lastNamePreviousValue");
-    }*/
     private void setUserID(Contact contact, HttpServletRequest request, ArrayList<String> errors) {
         Person user = (Person) request.getSession().getAttribute("user");
         String userid = user.getUserid();

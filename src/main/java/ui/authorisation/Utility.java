@@ -27,6 +27,6 @@ public class Utility {
                 }
             }
         }
-        if (!found) throw new NotAuthorizedException();
+        if (!found) throw new NotAuthorizedException("Je hebt niet de juiste rechten om deze pagina te bezoeken.");
     }
 }

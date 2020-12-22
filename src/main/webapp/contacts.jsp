@@ -53,6 +53,12 @@
             </div>
         </c:if>
 
+        <c:if test="${not empty positive}">
+            <div class="alert-feedback">
+                <p>${positive}</p>
+            </div>
+        </c:if>
+
         <c:if test="${user.role == 'ADMIN'}">
             <form novalidate="novalidate" method="post" action="Controller?command=AllContacts">
                 <!-- novalidate in order to be able to run tests correctly -->

@@ -15,6 +15,7 @@ public class LogOut extends RequestHandler {
         Utility.checkRole(request, roles);
 
         request.getSession().invalidate();
+        request.getSession().setAttribute("positive", "U bent succesvol uitgelogd.");
         response.sendRedirect("Controller?command=Home");
         //request.getRequestDispatcher("index.jsp").forward(request, response);
         return "index.jsp";

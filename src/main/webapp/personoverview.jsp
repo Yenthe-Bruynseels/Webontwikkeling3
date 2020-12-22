@@ -39,6 +39,12 @@
         </h2>
 
     </header>
+
+    <c:if test="${not empty positive}">
+        <div class="alert-feedback">
+            <p>${positive}</p>
+        </div>
+    </c:if>
     <main>
         <table>
             <tr>

@@ -16,6 +16,7 @@ public class Delete extends RequestHandler {
 
         String userid = request.getParameter("userid");
         cts.deletePerson(userid);
+        request.getSession().setAttribute("positive", userid + " is succesvol verwijderd");
         response.sendRedirect("Controller?command=Overview");
         //request.getRequestDispatcher("Controller?command=Overview").forward(request,response);
         return "Controller?command=Overview";

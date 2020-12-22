@@ -32,16 +32,19 @@ public class Controller extends HttpServlet {
                 RequestHandler handler = handlerFactory.getHandler(command,cts);
                 destination = handler.handleRequest(request, response);
             } catch (NotAuthorizedException e) {
-                request.setAttribute("notAuthorized", "You have insufficient rights to have a look at the requested page.");
+                request.getSession().setAttribute("notAuthorized", e.getMessage());
+                response.sendRedirect("Controller?command=Home ");
             } catch (Exception e) {
                 request.setAttribute("error", e.getMessage());
             }
         }
 
         if (!response.isCommitted()) {
+            request.setAttribute("notAuthorized",request.getSession().getAttribute("notAuthorized"));
+            request.getSession().removeAttribute("notAuthorized");
+            request.setAttribute("positive",request.getSession().getAttribute("positive"));
+            request.getSession().removeAttribute("positive");
             request.getRequestDispatcher(destination).forward(request,response);
         }
     }
-
-
 }

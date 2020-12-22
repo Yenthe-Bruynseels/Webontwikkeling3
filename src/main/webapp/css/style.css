@@ -107,6 +107,21 @@ form {
     list-style-type: none;
 }
 
+.alert-feedback {
+    padding: 0.5em;
+    background-color: #ceffb7;
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    border-radius: 3px;
+    width: 100%;
+    margin: 1em;
+    box-sizing: border-box;
+}
+
+.alert-feedback ul {
+    list-style-type: none;
+}
+
 label, input, textarea {
     margin-bottom: 16px;
 }
@@ -195,6 +210,9 @@ input {
     }
 
     .alert-danger {
+        width: 614px;
+    }
+    .alert-feedback {
         width: 614px;
     }
 

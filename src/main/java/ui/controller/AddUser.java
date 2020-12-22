@@ -4,6 +4,7 @@ import domain.db.DbException;
 import domain.model.DomainException;
 import domain.model.Person;
 import domain.model.Role;
+import ui.authorisation.NotAuthorizedException;
 import ui.authorisation.Utility;
 
 import javax.servlet.ServletException;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 public class AddUser extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Role[] roles = {Role.ADMIN, Role.CUSTOMER};
-        Utility.checkRole(request, roles);
+    if (request.getSession().getAttribute("user") != null) {
+        throw new NotAuthorizedException("Alleen niet ingelogde gebruikers mogen een nieuwe gebruiker registreren.");
+    }
+    else {
 
         ArrayList<String> errors = new ArrayList<String>();
 
@@ -30,13 +33,16 @@ public class AddUser extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 cts.addPerson(person);
+                request.getSession().setAttribute("positive", "U heeft zich succesvol geregistreerd.");
                 response.sendRedirect("Controller?command=Home");
             } catch (DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
+        //request.getSession().setAttribute("errors", errors);
         request.setAttribute("errors", errors);
         return "register.jsp";
+    }
     }
 
     private void setUserid(Person person, HttpServletRequest request, ArrayList<String> errors) {

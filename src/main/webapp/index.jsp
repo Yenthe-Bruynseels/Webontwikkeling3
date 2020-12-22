@@ -63,16 +63,23 @@
                 <p>${error}</p>
             </div>
         </c:if>
+
+        <c:if test="${not empty positive}">
+            <div class="alert-feedback">
+                <p>${positive}</p>
+            </div>
+        </c:if>
+
         <c:choose>
             <c:when test="${user == null}">
                 <form novalidate="novalidate" method="post" action="Controller?command=LogIn" id="form">
                     <!-- novalidate in order to be able to run tests correctly -->
                     <p><label for="userid">Username</label>
                         <input type="text" id="userid" name="userid"
-                               required></p>
+                        required></p>
                     <p><label for="password">Password</label>
                         <input type="password" id="password" name="password"
-                               required></p>
+                        required></p>
                     <p><input type="submit" id="logIn" value="Log In"></p>
 
                 </form>

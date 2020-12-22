@@ -16,6 +16,7 @@ public class DeleteContact extends RequestHandler {
 
         int id = Integer.parseInt(request.getParameter("id"));
         cts.deleteContact(id);
+        request.getSession().setAttribute("positive", "Het contact met id " + id + " is succesvol verwijderd.");
         response.sendRedirect("Controller?command=AllContactsUser");
         //request.getRequestDispatcher("Controller?command=AllContactsUser").forward(request,response);
         return "Controller?command=AllContactsUser";
