@@ -110,7 +110,7 @@
                 </tr>
 
                 <c:forEach var="contact" items="${contacts}">
-                    <tr data-date="<fmt:formatDate pattern="yyyyMMdd" value="${contact.timestamp}"/>">
+                    <tr>
                         <td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${contact.timestamp}"/></td>
                         <c:if test="${adminAllContacts == true}">
                             <td><c:out value="${contact.userid}"/></td>

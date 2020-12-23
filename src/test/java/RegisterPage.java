@@ -6,6 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends Page {
 
+
+    @FindBy(id="userid")
+    private WebElement usernameField;
+
     @FindBy(id="firstName")
     private WebElement firstNameField;
 
@@ -24,6 +28,11 @@ public class RegisterPage extends Page {
     public RegisterPage (WebDriver driver) {
         super(driver);
         this.driver.get(getPath()+"?command=Register");
+    }
+
+    public void setUsername(String username) {
+        usernameField.clear();
+        usernameField.sendKeys(username);
     }
 
     public void setFirstName(String firstName) {
@@ -60,6 +69,12 @@ public class RegisterPage extends Page {
         return (message.equals(errorMsg.getText()));
     }
 
+    public boolean hasStickyUsername(String userid) {return userid.equals(usernameField.getAttribute("value"));}
+
+    public boolean hasStickyFirstName(String firstname) {
+        return firstname.equals(firstNameField.getAttribute("value"));
+    }
+
     public boolean hasStickyLastName (String lastname) {
         return lastname.equals(lastNameField.getAttribute("value"));
     }
@@ -68,8 +83,24 @@ public class RegisterPage extends Page {
         return email.equals(emailField.getAttribute("value"));
     }
 
+    public boolean hasStickyPassword (String password) {
+        return password.equals(passwordField.getAttribute("value"));
+    }
+
     public boolean hasEmptyFirstName () {
         return firstNameField.getAttribute("value").isEmpty();
     }
 
+    public boolean hasEmptyLastName() {
+        return lastNameField.getAttribute("value").isEmpty();
+    }
+
+    public boolean hasEmptyEmail() {
+        return emailField.getAttribute("value").isEmpty();
+    }
+
+    public boolean hasEmptyPassword() {
+        return passwordField.getAttribute("value").isEmpty();
+
+    }
 }
