@@ -106,7 +106,6 @@
                     </c:choose>
                     <th>E-mail</th>
                     <th>Phone number</th>
-                    <th>Last Test result</th>
                 </tr>
 
                 <c:forEach var="contact" items="${contacts}">
@@ -153,6 +152,5 @@
     <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 <script src="scripts/formAuthentication.js"></script>
-=
 </body>
 </html>

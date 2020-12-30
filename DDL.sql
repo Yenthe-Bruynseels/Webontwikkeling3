@@ -37,7 +37,7 @@ CREATE TABLE web3_project_r0748609.contact ( -- replace r123456 with your studen
                                                email character varying(64) NOT NULL,
                                                phonenumber character varying(15) NOT NULL,
                                                contactdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                                               CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user"(userid)
+                                               CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user"(userid) ON DELETE CASCADE
 );
 
 GRANT ALL ON TABLE web3_project_r0748609.contact TO lector; -- replace r123456 with your studentnr
@@ -56,7 +56,7 @@ GRANT ALL ON TABLE web3_project_r0748609.contact_id_seq TO local_u0034562; -- le
 CREATE TABLE web3_project_r0748609.positivetest (
                                                 user_id character varying(50) NOT NULL,
                                                 testdate date NOT NULL,
-                                                CONSTRAINT fk_positivetest FOREIGN KEY (user_id) REFERENCES "user"(userid),
+                                                CONSTRAINT fk_positivetest FOREIGN KEY (user_id) REFERENCES "user"(userid) ON DELETE CASCADE ,
                                                 CONSTRAINT pk_positivetest PRIMARY KEY(user_id,testdate)
 
 );
