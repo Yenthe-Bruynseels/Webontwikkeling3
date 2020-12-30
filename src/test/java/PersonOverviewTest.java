@@ -24,7 +24,7 @@ public class PersonOverviewTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.managed_default_content_settings.javascript", 2);

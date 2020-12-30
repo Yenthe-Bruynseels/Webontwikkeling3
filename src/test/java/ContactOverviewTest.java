@@ -18,7 +18,7 @@ public class ContactOverviewTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.managed_default_content_settings.javascript", 2);
@@ -73,8 +73,8 @@ public class ContactOverviewTest {
         contactOverviewPage.setFirstName("testie");
         contactOverviewPage.setLastName("tester");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setDate("09042020");
-        contactOverviewPage.setHour("0808PM");
+        contactOverviewPage.setDate("09092020");
+        contactOverviewPage.setHour("0808AM");
         contactOverviewPage.setEmail("yenthe@test.be");
         contactOverviewPage.submitAddContact();
         int newNumber = contactOverviewPage.countContacts();

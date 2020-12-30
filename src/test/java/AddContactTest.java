@@ -19,7 +19,7 @@ public class AddContactTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "D:\\Software TI\\SeleniumShit\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver_win32\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.managed_default_content_settings.javascript", 2);
@@ -45,8 +45,8 @@ public class AddContactTest {
         contactOverviewPage.setLastName("Janssens");
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setHour("0101PM");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setHour("0101AM");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.containsFirstName(firstname));
@@ -59,8 +59,8 @@ public class AddContactTest {
         contactOverviewPage.setLastName("Janssens");
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setHour("0101PM");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setHour("0101AM");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.hasErrorMessage("No firstname given"));
@@ -69,7 +69,7 @@ public class AddContactTest {
         assertTrue(contactOverviewPage.hasStickyEmail("jan.janssens@hotmail.com"));
         assertTrue(contactOverviewPage.hasStickyPhonenumber("+32492606839"));
         assertTrue(contactOverviewPage.hasStickyHour("01:01"));
-        assertTrue(contactOverviewPage.hasStickyDate("2020-04-09"));
+        assertTrue(contactOverviewPage.hasStickyDate("2020-09-09"));
     }
 
     @Test
@@ -79,8 +79,8 @@ public class AddContactTest {
         contactOverviewPage.setLastName("");
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setHour("0101PM");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setHour("0101AM");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.hasErrorMessage("No last name given"));
@@ -89,7 +89,7 @@ public class AddContactTest {
         assertTrue(contactOverviewPage.hasStickyEmail("jan.janssens@hotmail.com"));
         assertTrue(contactOverviewPage.hasStickyPhonenumber("+32492606839"));
         assertTrue(contactOverviewPage.hasStickyHour("01:01"));
-        assertTrue(contactOverviewPage.hasStickyDate("2020-04-09"));
+        assertTrue(contactOverviewPage.hasStickyDate("2020-09-09"));
     }
 
     @Test
@@ -99,8 +99,8 @@ public class AddContactTest {
         contactOverviewPage.setLastName("Janssens");
         contactOverviewPage.setEmail("");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setHour("0101PM");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setHour("0101AM");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.hasErrorMessage("No email given"));
@@ -109,7 +109,7 @@ public class AddContactTest {
         assertTrue(contactOverviewPage.hasEmptyEmail());
         assertTrue(contactOverviewPage.hasStickyPhonenumber("+32492606839"));
         assertTrue(contactOverviewPage.hasStickyHour("01:01"));
-        assertTrue(contactOverviewPage.hasStickyDate("2020-04-09"));
+        assertTrue(contactOverviewPage.hasStickyDate("2020-09-09"));
     }
 
     @Test
@@ -119,8 +119,8 @@ public class AddContactTest {
         contactOverviewPage.setLastName("Janssens");
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("");
-        contactOverviewPage.setHour("0101PM");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setHour("0101AM");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.hasErrorMessage("Phone number can't be empty."));
@@ -129,7 +129,7 @@ public class AddContactTest {
         assertTrue(contactOverviewPage.hasStickyEmail("jan.janssens@hotmail.com"));
         assertTrue(contactOverviewPage.hasEmptyPhonenumber());
         assertTrue(contactOverviewPage.hasStickyHour("01:01"));
-        assertTrue(contactOverviewPage.hasStickyDate("2020-04-09"));
+        assertTrue(contactOverviewPage.hasStickyDate("2020-09-09"));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class AddContactTest {
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("+32492606839");
         contactOverviewPage.setHour("");
-        contactOverviewPage.setDate("09042020");
+        contactOverviewPage.setDate("09092020");
         contactOverviewPage.submitAddContact();
 
         assertTrue(contactOverviewPage.hasErrorMessage("date or hour invalid"));
@@ -149,7 +149,7 @@ public class AddContactTest {
         assertTrue(contactOverviewPage.hasStickyEmail("jan.janssens@hotmail.com"));
         assertTrue(contactOverviewPage.hasStickyPhonenumber("+32492606839"));
         assertTrue(contactOverviewPage.hasEmptyHour());
-        assertTrue(contactOverviewPage.hasStickyDate("2020-04-09"));
+        assertTrue(contactOverviewPage.hasStickyDate("2020-09-09"));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class AddContactTest {
         contactOverviewPage.setLastName("Janssens");
         contactOverviewPage.setEmail("jan.janssens@hotmail.com");
         contactOverviewPage.setPhonenumber("+32492606839");
-        contactOverviewPage.setHour("0101PM");
+        contactOverviewPage.setHour("0101AM");
         contactOverviewPage.setDate("");
         contactOverviewPage.submitAddContact();
 
