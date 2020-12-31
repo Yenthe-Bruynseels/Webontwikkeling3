@@ -42,7 +42,7 @@ public class DeleteContactTest {
 
     @Test
     public void test_AdminSeesDeleteButtons() {
-        submitLogInForm("admin", "t");
+        submitLogInForm("dummy", "t");
         driver.get(path + "?command=AllContactsUser");
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']"));
         System.out.println(deleteButtons1.size());
@@ -59,7 +59,7 @@ public class DeleteContactTest {
 
     @Test
     public void test_AdminDeletesContact() {
-        submitLogInForm("admin", "t");
+        submitLogInForm("dummy", "t");
         driver.get(path + "?command=AllContactsUser");
         submitAddContactForm("Yenthe", "Bruynseels", "09042020", "0808PM", "+32492606838", "yenthe@test.be"); // This is done, just to be sure that there will always be at least 1 contact in the database for if test would be run on it's own multiple times.
         List<WebElement> deleteButtons1 = driver.findElements(By.cssSelector("a[href*='Controller?command=DeleteContact&id=']")); //puts all delete buttons in a list
